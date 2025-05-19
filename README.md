@@ -16,7 +16,17 @@
 
 # fastapi dev main.py in Capstone-Blue-Collar/Backend/App
 
-# npm run dev in Capstone-Blue-Collar/Frontend/Public
+# In Capstone-Blue-Collar/Frontend/Public
+
+# [
+
+# npm install
+
+# npm install react-router
+
+# npm run dev
+
+# ]
 
 # Don't forget to CTRL + C to end FastAPI and Vite
 
