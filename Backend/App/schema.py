@@ -1,8 +1,8 @@
-from Pydantic import BaseModel, EmailStr, Field
-from typing import Optional
+from pydantic import BaseModel, EmailStr, Field
+from typing import List
 from datetime import datetime
 
-# User
+# USER
 
 
 class UserBase(BaseModel):
@@ -23,7 +23,7 @@ class UserOut(UserBase):
         orm_mode = True
 
 
-# Listing
+# LISTING
 
 
 class ListingBase(BaseModel):
@@ -44,6 +44,60 @@ class ListingOut(ListingBase):
     pending: bool = False
     created_at: str
     poster_id: int
+
+    class Config:
+        orm_mode = True
+
+
+# REQUEST
+
+
+class RequestBase(BaseModel):
+    listing_id: int
+    message: str
+    worker_id: int
+
+
+class RequestCreate(RequestBase):
+    pass
+
+
+class RequestOut(RequestBase):
+    request_id: int
+    status: str = "pending"
+    created_at: str
+
+    class Config:
+        orm_mode = True
+
+
+# SKILL
+
+
+class SkillBase(BaseModel):
+    skill_name: str = Field(..., max_length=50)
+
+
+class SkillCreate(SkillBase):
+    pass
+
+
+class SkillOut(SkillBase):
+    skill_id: int
+
+    class Config:
+        orm_mode = True
+
+
+# USER SKILL
+
+
+class UserSkillCreate(BaseModel):
+    user_id: int
+    skill_id: int
+
+
+class UserSkillOut(UserSkillCreate):
 
     class Config:
         orm_mode = True
