@@ -47,3 +47,19 @@ def login(user: UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=401, detail="Invalid email or password")
 
     return db_user
+
+
+@router.get("/{user_id}", response_model=UserOut)
+def get_user_by_id(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(DB_User).filter(DB_User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
+
+
+@router.get("/{user_name}", response_model=UserOut)
+def get_user_by_name(user_name: str, db: Session = Depends(get_db)):
+    user = db.query(DB_User).filter(DB_User.username == user_name).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
