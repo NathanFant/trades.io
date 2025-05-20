@@ -1,0 +1,49 @@
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from models import DB_User
+from schema import UserCreate, UserOut
+from database import get_db
+import bcrypt
+from datetime import datetime
+
+
+router = APIRouter(prefix="/user", tags=["user"])
+
+
+@router.post("/", response_model=UserOut)
+def create_user(user: UserCreate, db: Session = Depends(get_db)):
+
+    existing_user = db.query(DB_User).filter(DB_User.email == user.email).first()
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
+
+    bytes_pw = user.password.encode("utf-8")
+    salt = bcrypt.gensalt()
+    hashed_pw = bcrypt.hashpw(bytes_pw, salt).decode("utf-8")
+
+    db_user = DB_User(
+        username=user.username,
+        email=user.email,
+        password=hashed_pw,
+        # is_admin defaults to False
+        created_at=datetime.now().strftime("%m-%d-%Y %H:%M:%S"),
+    )
+
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
+
+@router.post("/login", response_model=UserOut)
+def login(user: UserCreate, db: Session = Depends(get_db)):
+    db_user = db.query(DB_User).filter(DB_User.email == user.email).first()
+    if not db_user:
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+
+    if not bcrypt.checkpw(
+        user.password.encode("utf-8"), db_user.password.encode("utf-8")
+    ):
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+
+    return db_user
