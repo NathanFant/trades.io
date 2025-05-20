@@ -47,7 +47,9 @@ class DB_Requests(Base):
 
 class DB_user_skills(Base):
     __tablename__ = "user_skills"
-    user_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"))
+    user_id = Column(
+        Integer, ForeignKey("users.user_id", ondelete="CASCADE"), primary_key=True
+    )
     skill_id = Column(Integer, ForeignKey("skills.skill_id"))
 
 
