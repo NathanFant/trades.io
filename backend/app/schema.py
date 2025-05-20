@@ -1,6 +1,4 @@
 from pydantic import BaseModel, EmailStr, Field
-from typing import List
-from datetime import datetime
 
 # USER
 
@@ -11,6 +9,11 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
+    password: str
+
+
+class UserLogin(BaseModel):  # Nathan added this to solve login endpoints
+    email: EmailStr
     password: str
 
 

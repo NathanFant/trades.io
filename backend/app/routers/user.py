@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from App.models import DB_User
-from App.schema import UserCreate, UserOut
+from App.schema import UserCreate, UserOut, UserLogin
 from App.database import get_db
 import bcrypt
 from datetime import datetime
@@ -19,7 +19,8 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
 
     bytes_pw = user.password.encode("utf-8")
     salt = bcrypt.gensalt()
-    hashed_pw = bcrypt.hashpw(bytes_pw, salt).decode("utf-8")
+    unhashed_pw = bcrypt.hashpw(bytes_pw, salt)
+    hashed_pw = unhashed_pw.decode("utf-8")
 
     db_user = DB_User(
         username=user.username,
@@ -32,11 +33,12 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
+
     return db_user
 
 
 @router.post("/login", response_model=UserOut)
-def login(user: UserCreate, db: Session = Depends(get_db)):
+def login(user: UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(DB_User).filter(DB_User.email == user.email).first()
     if not db_user:
         raise HTTPException(status_code=401, detail="Invalid email or password")
@@ -49,9 +51,9 @@ def login(user: UserCreate, db: Session = Depends(get_db)):
     return db_user
 
 
-@router.get("/{user_id}", response_model=UserOut)
+@router.get("/id/{user_id}", response_model=UserOut)
 def get_user_by_id(user_id: int, db: Session = Depends(get_db)):
-    user = db.query(DB_User).filter(DB_User.id == user_id).first()
+    user = db.query(DB_User).filter(DB_User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user
