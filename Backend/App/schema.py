@@ -54,7 +54,7 @@ class ListingOut(ListingBase):
 
 class RequestBase(BaseModel):
     listing_id: int
-    message: str
+    # message: str
     worker_id: int
 
 
@@ -64,7 +64,7 @@ class RequestCreate(RequestBase):
 
 class RequestOut(RequestBase):
     request_id: int
-    status: str = "pending"
+    # status: str = "pending"
     created_at: str
 
     class Config:
@@ -74,19 +74,19 @@ class RequestOut(RequestBase):
 # SKILL
 
 
-class SkillBase(BaseModel):
-    skill_name: str = Field(..., max_length=50)
+# class SkillBase(BaseModel):
+# skill_name: str = Field(..., max_length=50)
 
 
-class SkillCreate(SkillBase):
-    pass
+# class SkillCreate(SkillBase):
+# pass
 
 
-class SkillOut(SkillBase):
-    skill_id: int
+# class SkillOut(SkillBase):
+# skill_id: int
 
-    class Config:
-        orm_mode = True
+# class Config:
+# orm_mode = True
 
 
 # USER SKILL
