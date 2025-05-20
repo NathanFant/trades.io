@@ -37,7 +37,7 @@ class DB_Requests(Base):
     __tablename__ = "requests"
     request_id = Column(Integer, primary_key=True, index=True)
     listing_id = Column(Integer, ForeignKey("listings.listing_id", ondelete="CASCADE"))
-    requester_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"))
+    worker_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"))
     message = Column(Text, nullable=False)
     status = Column(String(50), default="pending")
     created_at = Column(
