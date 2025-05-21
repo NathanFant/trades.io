@@ -24,19 +24,23 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [expandedId, setExpandedId] = useState(null);
 
-  useEffect(() => {
-    fetch("http://localhost:8000/api/listings")
-      .then((response) => response.json())
-      .then((data) => {
-        setListings(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching listings:", error);
-        setLoading(false);
-      });
-    loadMockData();
-  }, []);
+useEffect(() => {
+  const fetchListings = async () => {
+    try {
+      const res = await fetch("http://localhost:8000/listings");
+      if (!res.ok) throw new Error("Failed to fetch listings");
+      const data = await res.json();
+      setListings(data);
+    } catch (err) {
+      console.error("Error fetching listings:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchListings();
+}, []);
+
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
