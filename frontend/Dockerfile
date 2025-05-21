@@ -1,10 +1,13 @@
-FROM node:18
+FROM node:latest
 
 WORKDIR /app
 
-COPY ./public/package*.json ./public/vite.config.js ./
+COPY ./package*.json ./
+
 RUN npm install
 
-COPY ./public .
+COPY . .
 
-CMD ["npm", "run", "dev", "--", "--host"]
+EXPOSE 5173
+
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

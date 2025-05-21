@@ -62,7 +62,7 @@ const HomePage = () => {
     <div className="homepage-container">
       <header className="homepage-header">
         <h1>BCF.COM</h1>
-        <div><h2>Welcome to Blue Collar Fiverrr</h2></div>
+        <div><h2>Welcome to Blue Collar Fiverr</h2></div>
         <div className="header-buttons">
           <button onClick={() => alert("Login clicked")}>Login</button>
           <button onClick={() => alert("Post Job clicked")}>Post a Job</button>

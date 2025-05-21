@@ -11,13 +11,16 @@ services:
       - db
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
     volumes:
-      - ./frontend:/public:/app
+      - ./frontend:/app
     working_dir: /app
     ports:
       - "5173:5173"
-    command: npm run dev -- --host
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    # command: npm run dev -- --host
 
   db:
     image: postgres:16
