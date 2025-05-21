@@ -23,7 +23,7 @@ class UserOut(UserBase):
     created_at: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # LISTING
@@ -49,7 +49,7 @@ class ListingOut(ListingBase):
     poster_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # REQUEST
@@ -71,7 +71,7 @@ class RequestOut(RequestBase):
     created_at: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # SKILL
@@ -103,4 +103,4 @@ class UserSkillCreate(BaseModel):
 class UserSkillOut(UserSkillCreate):
 
     class Config:
-        orm_mode = True
+        from_attributes = True
