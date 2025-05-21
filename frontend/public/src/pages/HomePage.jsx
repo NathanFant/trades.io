@@ -25,12 +25,16 @@ const HomePage = () => {
   const [expandedId, setExpandedId] = useState(null);
 
   useEffect(() => {
-    const loadMockData = () => {
-      setTimeout(() => {
-        setListings(mockListings);
+    fetch("http://localhost:8000/api/listings")
+      .then((response) => response.json())
+      .then((data) => {
+        setListings(data);
         setLoading(false);
-      }, 500);
-    };
+      })
+      .catch((error) => {
+        console.error("Error fetching listings:", error);
+        setLoading(false);
+      });
     loadMockData();
   }, []);
 
