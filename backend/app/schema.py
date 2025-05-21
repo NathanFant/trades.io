@@ -67,7 +67,7 @@ class RequestCreate(RequestBase):
 
 class RequestOut(RequestBase):
     request_id: int
-    # status: str = "pending"
+    status: str = "pending"
     created_at: str
 
     class Config:
