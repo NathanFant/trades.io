@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./HomePage.css";
 import ListingCard from "../components/ListingCard";
 import Searchbar from "../components/Searchbar";
 
@@ -32,7 +31,6 @@ const HomePage = () => {
 
   return (
     <div className="homepage-container">
-
       <Searchbar setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
       <div className="listings">
         {loading ? (
