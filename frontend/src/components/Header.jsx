@@ -1,19 +1,19 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export default function Header() {
     const navigate = useNavigate();
-    const { loggedIn } = useContext(UserContext);
+    const [loggedIn, setLoggedIn] = useState(false);
 
 
 
     return (
         <>
             <header>
-                <h2 className="homepage-link">BCF.COM</h2>
+                <h2 onClick={() => navigate('/')} className="homepage-link">BCF.COM</h2>
                 <div className="right-header-container">
                     {!loggedIn ? (
-                        <button className="login-button" onClick={() => alert("Login clicked")}>Login</button>
+                        <button className="login-button" onClick={() => navigate('/login')}>Login</button>
                     ) : (
                         <>
                         <button className="postjob-button" onClick={() => alert("Post a job clicked")}>Post a Job</button>

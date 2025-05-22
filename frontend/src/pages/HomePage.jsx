@@ -1,23 +1,6 @@
 import { useState, useEffect } from "react";
 import "./HomePage.css";
 
-const mockListings = [  //replace with listing logic
-  {
-    listing_id: 1,
-    title: "Drywall Repair Needed",
-    description: "Need help patching and sanding 2 walls.",
-    price: 150.0,
-    created_at: "2025-05-18",
-  },
-  {
-    listing_id: 2,
-    title: "Yard Cleanup Job",
-    description: "Front and back yard need cleanup and hauling.",
-    price: 200.0,
-    created_at: "2025-05-19",
-  },
-];
-
 const HomePage = () => {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
