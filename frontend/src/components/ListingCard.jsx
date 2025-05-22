@@ -1,11 +1,9 @@
+import RequestButton from "./RequestButton";
+
 export default function ListingCard({ job, expandedId, setExpandedId }) {
 
     const handleToggleExpand = (id) => {
         setExpandedId(expandedId === id ? null : id);
-    };
-
-    const handleRequestJob = (id) => {
-        alert(`Request sent for job ID: ${id}`);
     };
 
     const handleAskMore = (id) => {
@@ -32,12 +30,7 @@ export default function ListingCard({ job, expandedId, setExpandedId }) {
                   <p><strong>Price:</strong> ${job.price.toFixed(2)}</p>
                   <p><strong>Posted:</strong> {job.created_at}</p>
                   <div className="job-buttons">
-                    <button onClick={(e) => {
-                      e.stopPropagation();
-                      handleRequestJob(job.listing_id);
-                    }}>
-                      Request Job
-                    </button>
+                    <RequestButton job={job} />
                     <button onClick={(e) => {
                       e.stopPropagation();
                       handleAskMore(job.listing_id);
