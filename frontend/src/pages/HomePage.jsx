@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./HomePage.css";
 import ListingCard from "../components/Listing";
+import Searchbar from "../components/Searchbar";
 
 const HomePage = () => {
   const [listings, setListings] = useState([]);
@@ -8,27 +9,22 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [expandedId, setExpandedId] = useState(null);
 
-useEffect(() => {
-  const fetchListings = async () => {
-    try {
-      const res = await fetch("http://localhost:8000/listings");
-      if (!res.ok) throw new Error("Failed to fetch listings");
-      const data = await res.json();
-      setListings(data);
-    } catch (err) {
-      console.error("Error fetching listings:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const res = await fetch("http://localhost:8000/listings");
+        if (!res.ok) throw new Error("Failed to fetch listings");
+        const data = await res.json();
+        setListings(data);
+      } catch (err) {
+        console.error("Error fetching listings:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchListings();
-}, []);
-
-
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
+    fetchListings();
+  }, []);
 
   const filteredListings = listings.filter((job) =>
     job.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -37,14 +33,9 @@ useEffect(() => {
   return (
     <div className="homepage-container">
 
-      <input
-        type="text"
-        className="search-input"
-        placeholder="Search for jobs..."
-        value={searchTerm}
-        onChange={handleSearch}
-      />
-
+      <Searchbar
+        setSearchTerm={setSearchTerm}
+        searchTerm={searchTerm} />
       <div className="listings">
         {loading ? (
           <p>Loading jobs...</p>
