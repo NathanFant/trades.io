@@ -50,9 +50,7 @@ useEffect(() => {
     setExpandedId(expandedId === id ? null : id);
   };
 
-  const handleRequestJob = (id) => {
-    alert(`Request sent for job ID: ${id}`);
-  };
+
 
   const handleAskMore = (id) => {
     alert(`Asked for more info on job ID: ${id}`);
