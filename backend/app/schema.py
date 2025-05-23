@@ -32,8 +32,8 @@ class UserOut(UserBase):
 class ListingBase(BaseModel):
     title: str
     description: str
-    latitude: float
-    longitude: float
+    latitude: float = 1
+    longitude: float = 1
     price: float
 
 
