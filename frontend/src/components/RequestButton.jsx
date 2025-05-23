@@ -3,6 +3,19 @@ import { useEffect, useState} from "react";
 
 export default function RequestButton({ job }) {
     const { user } = useUser();
+    const [requested, setRequested] = useState(false);
+
+    useEffect(() => {
+       if (!user) return;
+
+       const key = requested_${user.user_id}_${job.listing_id}
+       if (localStorage.getItem(key)) {
+            setRequested(True);
+    }
+    }, [user,job.listing_id]
+);
+
+
 
 
     async function handleRequestJob() {
