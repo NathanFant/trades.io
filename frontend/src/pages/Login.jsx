@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useUser } from "../context/UserContext";
+import { useNavigate } from "react-router";
 
-export default function Login({ onLoginSuccess }) {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const { login } = useUser();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,8 +23,8 @@ export default function Login({ onLoginSuccess }) {
       }
 
       const data = await response.json();
-      localStorage.setItem("user", JSON.stringify(data));
-      onLoginSuccess(data);
+      login(data);
+      navigate('/')
     } catch (error) {
       setError(error.message);
     }
@@ -36,10 +40,12 @@ export default function Login({ onLoginSuccess }) {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="email"
           className="input-box"
+          type="email"
         />
         <input
           placeholder="password"
           value={password}
+          type="password"
           onChange={(e) => setPassword(e.target.value)}
           className="input-box"
         />
