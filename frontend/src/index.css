@@ -28,7 +28,6 @@ body {
     width: 100%;
     display: flex;
 
-
   }
 
 header {
@@ -39,12 +38,22 @@ header {
     width: auto;
     ;
   }
+
 .homepage-link {
   color: white;
+  margin-left: 0.5rem;
+}
+
+.homepage-link:hover {
+  cursor: pointer;
 }
 
 .right-header-container {
   padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  display: flex;
+  gap: 0.5rem;
+  margin-right: 0.5rem;
 
 }
 
@@ -123,7 +132,6 @@ button {
   border-radius: 4px;
   cursor: pointer;
   border: none;
-  margin:
 }
 
 button:hover {
@@ -142,3 +150,36 @@ button:hover {
   .job-buttons button:hover {
     background-color: #003366;
   }
+
+.profile-button {
+  text-transform: capitalize;
+}
+
+.listing {
+  display: flex block;
+  color: white;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.listing-form {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  width: 35rem;
+}
+
+.textarea-box {
+  resize: none;
+  height: 11rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  font-size: 0.9rem;
+}
+
+.create-button {
+  margin-top: 0.25rem;
+}

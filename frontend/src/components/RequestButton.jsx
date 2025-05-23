@@ -1,5 +1,4 @@
 import { useUser } from "../context/UserContext";
-import { useEffect, useState} from "react";
 
 export default function RequestButton({ job }) {
     const { user } = useUser();
@@ -22,12 +21,16 @@ export default function RequestButton({ job }) {
             if (!res.ok) {
                 if (res.status === 400) {
                     alert("Job already requested");
-                    return
+                    return;
+                }
+                if (res.status === 422) {
+                    alert("You must be logged in to request a job");
+                    return;
                 }
 
 
             }
-            alert("Job request sent to user:", job?.poster_id)
+            alert("Job request sent to user")
 
         } catch (err) {
             console.error("Error requesting job:", err);

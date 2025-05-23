@@ -10,8 +10,6 @@ export default function Header() {
     useEffect(() => {
         if (user) {
             setLoggedIn(true)
-        } else {
-            console.log("Failed to log in")
         }
     }, [user])
 
@@ -29,7 +27,7 @@ export default function Header() {
                         <button className="login-button" onClick={() => navigate('/login')}>Login</button>
                     ) : (
                         <>
-                        <button className="postjob-button" onClick={() => alert("Post a job clicked")}>Post a Job</button>
+                        <button className="postjob-button" onClick={() => navigate("/create")}>Post a Job</button>
                         <button className="profile-button" onClick={() => alert("Profile clicked")}>{user?.username}</button>
                         <button className="profile-button" onClick={handleLogOut}>Logout</button>
                         </>
