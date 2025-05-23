@@ -8,14 +8,12 @@ export default function RequestButton({ job }) {
     useEffect(() => {
        if (!user) return;
 
-       const key = requested_${user.user_id}_${job.listing_id}
-       if (localStorage.getItem(key)) {
-            setRequested(True);
+
+       if (localStorage.getItem(user.user_id)) {
+
     }
     }, [user,job.listing_id]
 );
-
-
 
 
     async function handleRequestJob() {
