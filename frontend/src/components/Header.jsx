@@ -1,11 +1,24 @@
-import { useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { useUser } from "../context/UserContext";
 
 export default function Header() {
     const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState(false);
+    const { user, logout } = useUser();
 
+    useEffect(() => {
+        if (user) {
+            setLoggedIn(true)
+        } else {
+            console.log("Failed to log in")
+        }
+    }, [user])
 
+    function handleLogOut() {
+        logout();
+        setLoggedIn(false);
+    }
 
     return (
         <>
@@ -17,7 +30,8 @@ export default function Header() {
                     ) : (
                         <>
                         <button className="postjob-button" onClick={() => alert("Post a job clicked")}>Post a Job</button>
-                        <button className="profile-button" onClick={() => alert("Profile clicked")}>Profile</button>
+                        <button className="profile-button" onClick={() => alert("Profile clicked")}>{user?.username}</button>
+                        <button className="profile-button" onClick={handleLogOut}>Logout</button>
                         </>
                     )}
                </div>
