@@ -38,8 +38,8 @@ const HomePage = () => {
         ) : filteredListings.length === 0 ? (
           <p>No jobs found.</p>
         ) : (
-          filteredListings.map((job) => (
-            <ListingCard job={job} expandedId={expandedId} setExpandedId={setExpandedId} />
+          filteredListings.map((job, index) => (
+            <ListingCard key={index} job={job} expandedId={expandedId} setExpandedId={setExpandedId} />
           ))
         )}
       </div>
