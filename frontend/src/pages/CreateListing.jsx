@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useUser } from "../context/UserContext";
 
 export default function CreateListing() {
@@ -18,7 +18,7 @@ export default function CreateListing() {
             title: listingTitle,
             description: listingDesc,
             price: listingPay,
-            poster_i: user?.user_id,
+            poster_id: user?.user_id,
         }
 
         try {
@@ -40,16 +40,17 @@ export default function CreateListing() {
         <>
             <div className="listing container">
                 <h2>Create a job posting</h2>
-                <form className="listing-form" onClick={handleSubmit} >
-                    Job Title:{" "}<input
+                <form className="listing-form" onSubmit={(e) => handleSubmit(e)} >
+                    Job Title<input
                     className="input-box"
                     placeholder="Job..."
                     value={listingTitle}
                     onChange={(e) => {
                         setListingTitle(e.target.value)
                     }}
+                    required
                     />
-                    Job Description:{" "}<textarea
+                    Job Description<textarea
                     className="input-box textarea-box"
                     placeholder="Description..."
                     value={listingDesc}
@@ -57,15 +58,18 @@ export default function CreateListing() {
                         setListingDesc(e.target.value)
                     }}
                     rows={6}
+                    required
                      />
-                    Job Pay:{" "}<input
+                    Job Pay<input
                     className="input-box"
                     placeholder="Pay..."
                     value={listingPay}
                     onChange={(e) => {
                         setListingPay(e.target.value)
                     }}
+                    required
                     />
+                    <button type="submit" className="create-button">Post job</button>
 
                 </form>
 

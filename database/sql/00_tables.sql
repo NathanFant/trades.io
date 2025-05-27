@@ -4,7 +4,8 @@ CREATE TABLE users (
   email VARCHAR(100) UNIQUE NOT NULL,
   password TEXT NOT NULL,
   is_admin BOOL DEFAULT FALSE,
-  created_at VARCHAR(50));
+  created_at DATE NOT NULL
+  );
 
 CREATE TABLE listings (
   listing_id SERIAL PRIMARY KEY,
@@ -16,7 +17,8 @@ CREATE TABLE listings (
   completed BOOL DEFAULT FALSE,
   pending BOOL DEFAULT FALSE,
   poster_id INT REFERENCES users(user_id) ON DELETE CASCADE,
-  created_at VARCHAR(50));
+  created_at DATE NOT NULL
+  );
 
 
 CREATE TABLE requests (
@@ -25,7 +27,8 @@ CREATE TABLE requests (
   worker_id INT REFERENCES users(user_id) ON DELETE CASCADE,
   -- message TEXT NOT NULL,
   -- status VARCHAR(50) DEFAULT "pending",
-  created_at VARCHAR(50));
+  created_at DATE NOT NULL
+  );
 
 CREATE TABLE skills (
   skill_id SERIAL PRIMARY KEY,
