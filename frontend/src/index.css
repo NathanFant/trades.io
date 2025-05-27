@@ -205,3 +205,25 @@ button:hover {
   width: 100%;
   font-weight: bold;
 }
+
+
+@media (max-width: 768px) {
+  .homepage-container-with-ads {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .ads-left,
+  .ads-right {
+    display: none;
+  }
+
+  .homepage-main-content {
+    width: 95%;
+    padding: 0;
+  }
+
+  .job-card {
+    width: 95%;
+    margin: 0.5rem auto;
+  }
