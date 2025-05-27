@@ -1,6 +1,6 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Text, Boolean, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Text, Boolean, Float, Date
 from sqlalchemy.ext.declarative import declarative_base
-from datetime import datetime
+from datetime import date
 
 Base = declarative_base()
 
@@ -12,9 +12,7 @@ class DB_User(Base):
     email = Column(String(100), nullable=False, unique=True)
     password = Column(Text, nullable=False)
     is_admin = Column(Boolean, default=False)
-    created_at = Column(
-        String(50), default=datetime.now().strftime("%m-%d-%Y %H:%M:%S")
-    )
+    created_at = Column(Date, default=date.today)
 
 
 class DB_Listings(Base):
@@ -28,9 +26,7 @@ class DB_Listings(Base):
     completed = Column(Boolean, default=False)
     pending = Column(Boolean, default=False)
     poster_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"))
-    created_at = Column(
-        String(50), default=datetime.now().strftime("%m-%d-%Y %H:%M:%S")
-    )
+    created_at = Column(Date, default=date.today)
 
 
 class DB_Requests(Base):
@@ -40,9 +36,7 @@ class DB_Requests(Base):
     worker_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"))
     # message = Column(Text, nullable=False)
     # status = Column(String(50), default="pending")
-    created_at = Column(
-        String(50), default=datetime.now().strftime("%m-%d-%Y %H:%M:%S")
-    )
+    created_at = Column(Date, default=date.today)
 
 
 class DB_user_skills(Base):
