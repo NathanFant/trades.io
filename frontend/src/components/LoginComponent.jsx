@@ -2,7 +2,7 @@ import { useUser } from "../context/UserContext";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-export default function LoginForm({ handleSignClick }) {
+export default function LoginForm() {
 
     const { login } = useUser();
     const [email, setEmail] = useState("");

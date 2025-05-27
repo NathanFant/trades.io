@@ -28,7 +28,7 @@ export default function Header() {
     return (
         <>
             <header>
-                <h2 onClick={() => navigate('/')} className="homepage-link">BCF.COM</h2>
+                <h2 onClick={() => navigate('/')} className="homepage-link">Trades.io</h2>
                 <div className="right-header-container">
                     {!loggedIn ? (
                         <>

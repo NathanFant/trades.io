@@ -10,7 +10,7 @@ export default function Login() {
     {signUp ?
     <CreateUser signUp={signUp} handleSignClick={handleSignClick} />
      :
-    <LoginForm  signUp={signUp} handleSignClick={handleSignClick} />}
+    <LoginForm  signUp={signUp} />}
     </>
   );
 }
