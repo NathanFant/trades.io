@@ -1,23 +1,19 @@
 import { useUser } from "../context/UserContext";
-import { useEffect, useState} from "react";
+import { useState, useEffect } from "react";
 
 export default function RequestButton({ job }) {
     const { user } = useUser();
     const [requested, setRequested] = useState(false);
 
     useEffect(() => {
-       if (!user) return;
-
-
-       if (localStorage.getItem(user.user_id)) {
-
-    }
-    }, [user,job.listing_id]
-);
-
+        if (!user) return;
+        const key = `requested_${user.user_id}_${job.listing_id}`;
+        if (localStorage.getItem(key)) {
+            setRequested(true);
+        }
+    }, [user, job.listing_id]);
 
     async function handleRequestJob() {
-
         try {
             const res = await fetch("http://localhost:8000/requests", {
                 method: "POST",
@@ -25,20 +21,23 @@ export default function RequestButton({ job }) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    listing_id: job?.poster_id,
-                    worker_id: user?.user_id
+                    listing_id: job?.listing_id,
+                    worker_id: user?.user_id,
                 }),
             });
 
             if (!res.ok) {
                 if (res.status === 400) {
                     alert("Job already requested");
-                    return
+                    setRequested(true);
+                    localStorage.setItem(`requested_${user.user_id}_${job.listing_id}`, "true");
+                    return;
                 }
-
-
             }
-            alert("Job request sent to user:", job?.poster_id)
+
+            alert("Job request sent!");
+            setRequested(true);
+            localStorage.setItem(`requested_${user.user_id}_${job.listing_id}`, "true");
 
         } catch (err) {
             console.error("Error requesting job:", err);
@@ -46,10 +45,18 @@ export default function RequestButton({ job }) {
     }
 
     return (
-        <button onClick={(e) => {
-            e.stopPropagation();
-            handleRequestJob();
-        }}
-        >Request Job</button>
-    )
+        <button
+            onClick={(e) => {
+                e.stopPropagation();
+                handleRequestJob();
+            }}
+            disabled={requested}
+            style={{
+                opacity: requested ? 0.5 : 1,
+                cursor: requested ? "not-allowed" : "pointer"
+            }}
+        >
+            {requested ? "Requested" : "Request Job"}
+        </button>
+    );
 }
