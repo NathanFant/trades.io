@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useUser } from "../context/UserContext";
+import { useLogin } from "../context/LoginContext";
 
 export default function Header() {
     const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState(false);
     const { user, logout } = useUser();
+    const { handleSignClick } = useLogin();
 
     useEffect(() => {
         if (user) {
@@ -18,18 +20,26 @@ export default function Header() {
         setLoggedIn(false);
     }
 
+    function handleAccClick(bool) {
+        handleSignClick(bool)
+        navigate('/login')
+    }
+
     return (
         <>
             <header>
                 <h2 onClick={() => navigate('/')} className="homepage-link">BCF.COM</h2>
                 <div className="right-header-container">
                     {!loggedIn ? (
-                        <button className="login-button" onClick={() => navigate('/login')}>Login</button>
+                        <>
+                            <button className="login-button" onClick={() => handleAccClick(false)}>Login</button>
+                            <button className="login-button" onClick={() => handleAccClick(true)}>Create account</button>
+                        </>
                     ) : (
                         <>
-                        <button className="postjob-button" onClick={() => navigate("/create")}>Post a Job</button>
-                        <button className="profile-button" onClick={() => alert("Profile clicked")}>{user?.username}</button>
-                        <button className="profile-button" onClick={handleLogOut}>Logout</button>
+                            <button className="postjob-button" onClick={() => navigate("/create")}>Post a Job</button>
+                            <button className="profile-button" onClick={() => alert("Profile clicked")}>{user?.username}</button>
+                            <button className="profile-button" onClick={handleLogOut}>Logout</button>
                         </>
                     )}
                </div>
