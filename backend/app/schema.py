@@ -1,4 +1,5 @@
 from pydantic import BaseModel, EmailStr, Field
+from datetime import date
 
 # USER
 
@@ -20,7 +21,7 @@ class UserLogin(BaseModel):  # Nathan added this to solve login endpoints
 class UserOut(UserBase):
     user_id: int
     is_admin: bool = False
-    created_at: str
+    created_at: date
 
     class Config:
         from_attributes = True
@@ -45,7 +46,7 @@ class ListingOut(ListingBase):
     listing_id: int
     completed: bool = False
     pending: bool = False
-    created_at: str
+    created_at: date
     poster_id: int
 
     class Config:
@@ -68,7 +69,7 @@ class RequestCreate(RequestBase):
 class RequestOut(RequestBase):
     request_id: int
     status: str = "pending"
-    created_at: str
+    created_at: date
 
     class Config:
         from_attributes = True
