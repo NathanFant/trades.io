@@ -1,19 +1,19 @@
 INSERT INTO users (username, email, password, is_admin, created_at)
 VALUES
-('Trent', 'trent@gmail.com', 'test_pass1', TRUE, '2025-05-15'),
-('Nathan', 'nathan@gmail.com', 'test_pass2', TRUE, '2025-05-16'),
-('Ryan', 'ryan@gmail.com', 'test_pass3', TRUE, '2025-05-17'),
-('Dan', 'dan@gmail.com', 'test_pass4', TRUE, '2025-05-18'),
-('Vince', 'vince@gmail.com', 'test_pass5', TRUE, '2025-05-19'),
-('Johnny', 'Johnny@sins.com', 'test_pass6', FALSE, '2025-05-20');
+('Trent', 'trent@gmail.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', TRUE, '2025-05-15'),
+('Nathan', 'nathan@gmail.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', TRUE, '2025-05-16'),
+('Ryan', 'ryan@gmail.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', TRUE, '2025-05-17'),
+('Dan', 'dan@gmail.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', TRUE, '2025-05-18'),
+('Vince', 'vince@gmail.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', TRUE, '2025-05-19'),
+('Johnny', 'Johnny@example.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', FALSE, '2025-05-20');
 
 INSERT INTO listings (title, description, latitude, longitude, price, poster_id, created_at)
 VALUES
-('Need my pipes cleaned', 'I"m in dire need of getting my "pipes" cleaned', 69.420, 17.38, 100.00, 1, '2025-05-21'),
-('Need my yard mowed', 'I need my "yard" mowed', 69.420, 17.38, 99.00, 2, '2025-05-21'),
-('Need "help"', 'I need "help" with something', 69.420, 17.38, 98.00, 3, '2025-05-21'),
-('Need help with internet', 'I really need help improving my internet speed today', 69.420, 17.38, 97.00, 4, '2025-05-21'),
-('Need help with discord', 'Looking for help with Discord UI', 69.420, 17.38, 96.00, 5, '2025-05-21');
+('Need my sink fixed', 'The pipes under my sink are leaking', 50, 17.38, 100.00, 1, '2025-05-21'),
+('Need my yard mowed', 'I need my yard mowed', 34.74, -92.29, 99.00, 2, '2025-05-21'),
+('Need my deck painted', 'old paint needs stripped and repainted', 22.21, 17.38, 98.00, 3, '2025-05-21'),
+('Need help with internet', 'landscaper cut my cables out back and my internet is out', 55.11, 17.38, 97.00, 4, '2025-05-21'),
+('NO COOL AIR!', 'AC AINT WORKIN!', 17.38, 17.38, 96.00, 5, '2025-05-21');
 
 INSERT INTO requests (listing_id, worker_id, created_at)
 VALUES

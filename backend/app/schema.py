@@ -78,19 +78,15 @@ class RequestOut(RequestBase):
 # SKILL
 
 
-# class SkillBase(BaseModel):
-# skill_name: str = Field(..., max_length=50)
+class SkillCreate(BaseModel):
+    skill_name: str
 
 
-# class SkillCreate(SkillBase):
-# pass
+class SkillOut(SkillCreate):
+    skill_id: int
 
-
-# class SkillOut(SkillBase):
-# skill_id: int
-
-# class Config:
-# orm_mode = True
+    class Config:
+        from_attributes = True
 
 
 # USER SKILL
