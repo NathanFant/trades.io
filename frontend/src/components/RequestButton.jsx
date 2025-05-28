@@ -1,47 +1,94 @@
 import { useUser } from "../context/UserContext";
+import { useEffect, useState } from "react";
 
 export default function RequestButton({ job }) {
-    const { user } = useUser();
+  const { user } = useUser();
+  const [hasRequested, setHasRequested] = useState(false);
+  const [loading, setLoading] = useState(true);
 
 
-    async function handleRequestJob() {
+  useEffect(() => {
+    const checkRequestStatus = async () => {
+      if (!user || !job) return;
 
-        try {
-            const res = await fetch("http://localhost:8000/requests", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    listing_id: job?.poster_id,
-                    worker_id: user?.user_id
-                }),
-            });
+      try {
+        const res = await fetch(`http://localhost:8000/requests/worker/${user.user_id}`);
+        const data = await res.json();
+        const alreadyRequested = data.some(
+          (req) => req.listing_id === job.listing_id
+        );
+        setHasRequested(alreadyRequested);
+      } catch (err) {
+        console.error("Error checking request status:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-            if (!res.ok) {
-                if (res.status === 400) {
-                    alert("Job already requested");
-                    return;
-                }
-                if (res.status === 422) {
-                    alert("You must be logged in to request a job");
-                    return;
-                }
+    checkRequestStatus();
+  }, [user, job]);
 
+  const handleRequestJob = async () => {
+    try {
+      const res = await fetch("http://localhost:8000/requests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          listing_id: job.listing_id,
+          worker_id: user.user_id,
+        }),
+      });
 
-            }
-            alert("Job request sent to user")
+      if (!res.ok) {
+        const errorData = await res.json();
+        alert(errorData.detail || "Failed to request job");
+        return;
+      }
 
-        } catch (err) {
-            console.error("Error requesting job:", err);
-        }
+      alert("Job request sent!");
+      setHasRequested(true);
+    } catch (err) {
+      console.error("Error requesting job:", err);
     }
+  };
 
-    return (
-        <button onClick={(e) => {
-            e.stopPropagation();
-            handleRequestJob();
-        }}
-        >Request Job</button>
-    )
+  const handleCancelRequest = async () => {
+    try {
+      const res = await fetch(`http://localhost:8000/requests/${user.user_id}/${job.listing_id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        alert("Failed to cancel request");
+        return;
+      }
+
+      alert("Request canceled.");
+      setHasRequested(false);
+    } catch (err) {
+      console.error("Error cancelling request:", err);
+    }
+  };
+
+  if (!user || loading) return null;
+
+  return (
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        hasRequested ? handleCancelRequest() : handleRequestJob();
+      }}
+      style={{
+        opacity: 1,
+        backgroundColor: hasRequested ? "#f44336" : "#4CAF50",
+        color: "white",
+        padding: "8px 12px",
+        border: "none",
+        borderRadius: "4px",
+        cursor: "pointer"
+      }}
+    >
+      {hasRequested ? "Cancel Request" : "Request Job"}
+    </button>
+  );
 }
