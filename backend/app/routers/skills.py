@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from app.models import DB_skills, DB_User, DB_user_skills
 from app.schema import SkillCreate, SkillOut, UserSkillCreate, UserSkillOut
 from app.database import get_db
-from sqlalchemy import and_, join
+from sqlalchemy import and_
 
 router = APIRouter(prefix="/skill", tags=["skills"])
 
@@ -87,18 +87,33 @@ async def delete_user_skill(user_skill: UserSkillCreate, db: Session = Depends(g
 @router.get("/user/{user_id}", response_model=list[SkillOut])
 async def get_all_user_skills(user_id: int, db: Session = Depends(get_db)):
     db_user_skills = (
-        db.query(DB_user_skills)
-        .join(DB_skills, DB_skills.skill_id == DB_user_skills.skill_id)
+        db.query(DB_skills.skill_id, DB_skills.skill_name)
+        .join(DB_user_skills, DB_skills.skill_id == DB_user_skills.skill_id)
         .filter(DB_user_skills.user_id == user_id)
-    ).all()
+        .all()
+    )
 
     if not db_user_skills:
         raise HTTPException(
             status_code=404, detail="User does not have skills assigned"
         )
 
-    all_user_skills = []
-    for skill in db_user_skills:
-        all_user_skills.append(
-            SkillOut(skill_name=skill.skill_name, skill_id=skill.skill_id)
-        )
+    # all_user_skills = []
+    # for skill in db_user_skills:
+    #     all_user_skills.append(
+    #         SkillOut(skill_name=skill.skill_name, skill_id=skill.skill_id)
+    #     )
+    return [
+        SkillOut(skill_id=skill.skill_id, skill_name=skill.skill_name)
+        for skill in db_user_skills
+    ]
+
+
+@router.get("/", response_model=list[SkillOut])
+async def get_all_skills(db: Session = Depends(get_db)):
+    skills = db.query(DB_skills).all()
+
+    return [
+        SkillOut(skill_id=skill.skill_id, skill_name=skill.skill_name)
+        for skill in skills
+    ]
