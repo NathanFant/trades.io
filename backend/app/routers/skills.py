@@ -81,3 +81,6 @@ async def delete_user_skill(user_skill: UserSkillCreate, db: Session = Depends(g
     return {
         "Internal Message": f"User with id of {user_skill.user_id} had skill with id {user_skill.skill_id} removed!"
     }
+
+
+# take user_id to join skill table
