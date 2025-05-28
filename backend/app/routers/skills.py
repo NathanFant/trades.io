@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.models import DB_skills, DB_User, DB_user_skills
-from app.schema import SkillCreate, SkillOut, UserSkillCreate, UserSkillOut, UserOut
+from app.schema import SkillCreate, SkillOut, UserSkillCreate, UserSkillOut
 from app.database import get_db
+from sqlalchemy import and_
 
 router = APIRouter(prefix="/skill", tags=["skills"])
 
@@ -18,7 +19,7 @@ router = APIRouter(prefix="/skill", tags=["skills"])
 
 # output skill information
 @router.get("/id/{id}", response_model=SkillOut)
-def get_skill_by_skill_id(id: int, db: Session = Depends(get_db)):
+async def get_skill_by_skill_id(id: int, db: Session = Depends(get_db)):
     skill = db.query(DB_skills).filter(DB_skills.skill_id == id).first()
 
     if not skill:
@@ -30,7 +31,7 @@ def get_skill_by_skill_id(id: int, db: Session = Depends(get_db)):
 
 
 @router.get("/{name}", response_model=SkillOut)
-def get_skill_by_name(name: str, db: Session = Depends(get_db)):
+async def get_skill_by_name(name: str, db: Session = Depends(get_db)):
     skill = db.query(DB_skills).filter(DB_skills.skill_name == name).first()
 
     if not skill:
@@ -41,15 +42,42 @@ def get_skill_by_name(name: str, db: Session = Depends(get_db)):
     return skill_out
 
 
-@router.post("/")
-def assign_user_skill(user_skill: UserSkillCreate, db: Session = Depends(get_db)):
+@router.post("/", response_model=UserSkillOut)
+async def assign_user_skill(user_skill: UserSkillCreate, db: Session = Depends(get_db)):
 
-    dv_user_skill = DB_user_skills(
-        user_id=user_skill.user_id, skill_id=user_skill.skill_id
+    db_user_skill = DB_user_skills(**user_skill.model_dump())
+
+    db.add(db_user_skill)
+    db.commit()
+    db.refresh(db_user_skill)
+
+    user = UserSkillOut.model_validate(
+        {"user_id": user_skill.user_id, "skill_id": user_skill.skill_id}
     )
 
-    db.add(dv_user_skill)
-    db.commit()
-    db.refresh(dv_user_skill)
+    return user
 
-    return dv_user_skill
+
+@router.delete("/")
+async def delete_user_skill(user_skill: UserSkillCreate, db: Session = Depends(get_db)):
+
+    db_user_skill = (
+        db.query(DB_user_skills)
+        .filter(
+            and_(
+                DB_user_skills.skill_id == user_skill.skill_id,
+                DB_user_skills.user_id == user_skill.user_id,
+            )
+        )
+        .first()
+    )
+
+    if not db_user_skill:
+        raise HTTPException(status_code=404, detail="User does not have skill assigned")
+    print(db_user_skill)
+    db.delete(db_user_skill)
+    db.commit()
+
+    return {
+        "Internal Message": f"User with id of {user_skill.user_id} had skill with id {user_skill.skill_id} removed!"
+    }

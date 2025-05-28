@@ -1,4 +1,14 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Text, Boolean, Float, Date
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    ForeignKey,
+    Text,
+    Boolean,
+    Float,
+    Date,
+    UniqueConstraint,
+)
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import date
 
@@ -45,6 +55,10 @@ class DB_user_skills(Base):
         Integer, ForeignKey("users.user_id", ondelete="CASCADE"), primary_key=True
     )
     skill_id = Column(Integer, ForeignKey("skills.skill_id"))
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "skill_id", name="unique_skill_pair"),
+    )
 
 
 class DB_skills(Base):

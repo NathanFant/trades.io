@@ -36,4 +36,6 @@ CREATE TABLE skills (
 
 CREATE TABLE user_skills (
   user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
-  skill_id INT REFERENCES skills(skill_id));
+  skill_id INT REFERENCES skills(skill_id),
+  CONSTRAINT unique_skill_pair UNIQUE (user_id, skill_id)
+);

@@ -11,7 +11,7 @@ router = APIRouter(prefix="/users", tags=["users"])
 
 
 @router.post("/", response_model=UserOut)
-def create_user(user: UserCreate, db: Session = Depends(get_db)):
+async def create_user(user: UserCreate, db: Session = Depends(get_db)):
 
     existing_user = db.query(DB_User).filter(DB_User.email == user.email).first()
     if existing_user:
@@ -38,7 +38,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
 
 
 @router.post("/login", response_model=UserOut)
-def login(user: UserLogin, db: Session = Depends(get_db)):
+async def login(user: UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(DB_User).filter(DB_User.email == user.email).first()
     if not db_user:
         raise HTTPException(status_code=401, detail="Invalid email or password")
@@ -52,7 +52,7 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
 
 
 @router.get("/@{user_name}", response_model=UserOut)
-def get_user_by_name(user_name: str, db: Session = Depends(get_db)):
+async def get_user_by_name(user_name: str, db: Session = Depends(get_db)):
     user = db.query(DB_User).filter(DB_User.username == user_name).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -60,7 +60,7 @@ def get_user_by_name(user_name: str, db: Session = Depends(get_db)):
 
 
 @router.get("/{user_id}", response_model=UserOut)
-def get_user_by_id(user_id: int, db: Session = Depends(get_db)):
+async def get_user_by_id(user_id: int, db: Session = Depends(get_db)):
     user = db.query(DB_User).filter(DB_User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
