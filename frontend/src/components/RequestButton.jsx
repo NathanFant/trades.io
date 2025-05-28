@@ -3,18 +3,33 @@ import { useState, useEffect } from "react";
 
 export default function RequestButton({ job }) {
     const { user } = useUser();
-    const [requested, setRequested] = useState(false);
-
-    const key = `requested_${user?.user_id}_${job?.listing_id}`;
+    const [hasRequested, setHasRequested] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (!user || !job) return;
-        if (localStorage.getItem(key)) {
-            setRequested(true);
-        }
+        const checkRequestStatus = async () => {
+            if (!user || !job) return;
+
+            try {
+                const res = await fetch(`http://localhost:8000/requests/${user.user_id}`);
+                const data = await res.json();
+                const alreadyRequested = data.some(
+                    (request) => request.listing_id === job.listing_id
+                );
+                setHasRequested(alreadyRequested);
+            } catch (err) {
+                console.error("Error checking request status:", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        checkRequestStatus();
     }, [user, job]);
 
-    async function handleRequestJob() {
+
+
+    const handleRequestJob = async () => {
         try {
             const res = await fetch("http://localhost:8000/requests", {
                 method: "POST",
@@ -37,15 +52,14 @@ export default function RequestButton({ job }) {
             }
 
             alert("Job request sent!");
-            setRequested(true);
-            localStorage.setItem(key, "true");
+            setHasRequested(true);
 
         } catch (err) {
             console.error("Error requesting job:", err);
         }
     }
 
-    async function handleCancelRequest() {
+    const handleCancelRequest = async () => {
         try {
             const res = await fetch(`http://localhost:8000/requests/${user.user_id}/${job.listing_id}`, {
                 method: "DELETE",
@@ -57,23 +71,24 @@ export default function RequestButton({ job }) {
             }
 
             alert("Request canceled.");
-            setRequested(false);
-            localStorage.removeItem(key);
+            setHasRequested(false);
 
         } catch (err) {
             console.error("Error cancelling request:", err);
         }
     }
+    if (!user || loading) return null;
+
 
     return (
         <button
             onClick={(e) => {
                 e.stopPropagation();
-                requested ? handleCancelRequest() : handleRequestJob();
+                setHasRequested ? handleCancelRequest() : handleRequestJob();
             }}
             style={{
                 opacity: 1,
-                backgroundColor: requested ? "#f44336" : "#4CAF50",
+                backgroundColor: hasRequested ? "#f44336" : "#4CAF50",
                 color: "white",
                 padding: "8px 12px",
                 border: "none",
@@ -81,7 +96,7 @@ export default function RequestButton({ job }) {
                 cursor: "pointer"
             }}
         >
-            {requested ? "Cancel Request" : "Request Job"}
+            {hasRequested ? "Cancel Request" : "Request Job"}
         </button>
     );
 }
