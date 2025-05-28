@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app.models import DB_skills, DB_User, DB_user_skills
 from app.schema import SkillCreate, SkillOut, UserSkillCreate, UserSkillOut
 from app.database import get_db
-from sqlalchemy import and_
+from sqlalchemy import and_, join
 
 router = APIRouter(prefix="/skill", tags=["skills"])
 
@@ -74,7 +74,7 @@ async def delete_user_skill(user_skill: UserSkillCreate, db: Session = Depends(g
 
     if not db_user_skill:
         raise HTTPException(status_code=404, detail="User does not have skill assigned")
-    print(db_user_skill)
+
     db.delete(db_user_skill)
     db.commit()
 
@@ -84,3 +84,21 @@ async def delete_user_skill(user_skill: UserSkillCreate, db: Session = Depends(g
 
 
 # take user_id to join skill table
+@router.get("/user/{user_id}", response_model=list[SkillOut])
+async def get_all_user_skills(user_id: int, db: Session = Depends(get_db)):
+    db_user_skills = (
+        db.query(DB_user_skills)
+        .join(DB_skills, DB_skills.skill_id == DB_user_skills.skill_id)
+        .filter(DB_user_skills.user_id == user_id)
+    ).all()
+
+    if not db_user_skills:
+        raise HTTPException(
+            status_code=404, detail="User does not have skills assigned"
+        )
+
+    all_user_skills = []
+    for skill in db_user_skills:
+        all_user_skills.append(
+            SkillOut(skill_name=skill.skill_name, skill_id=skill.skill_id)
+        )
