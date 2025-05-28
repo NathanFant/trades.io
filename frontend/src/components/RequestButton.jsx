@@ -1,5 +1,6 @@
+
 import { useUser } from "../context/UserContext";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function RequestButton({ job }) {
     const { user } = useUser();
@@ -42,22 +43,24 @@ export default function RequestButton({ job }) {
                 }),
             });
 
-            if (!res.ok) {
-                if (res.status === 400) {
-                    alert("Job already requested");
-                } else {
-                    alert("Failed to request job");
-                }
-                return;
-            }
+    checkRequestStatus();
+  }, [user, job]);
 
             alert("Job request sent!");
             setHasRequested(true);
 
-        } catch (err) {
-            console.error("Error requesting job:", err);
-        }
+      if (!res.ok) {
+        const errorData = await res.json();
+        alert(errorData.detail || "Failed to request job");
+        return;
+      }
+
+      alert("Job request sent!");
+      setHasRequested(true);
+    } catch (err) {
+      console.error("Error requesting job:", err);
     }
+  };
 
     const handleCancelRequest = async () => {
         try {
@@ -65,10 +68,10 @@ export default function RequestButton({ job }) {
                 method: "DELETE",
             });
 
-            if (!res.ok) {
-                alert("Failed to cancel request");
-                return;
-            }
+      if (!res.ok) {
+        alert("Failed to cancel request");
+        return;
+      }
 
             alert("Request canceled.");
             setHasRequested(false);
