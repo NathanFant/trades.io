@@ -4,109 +4,84 @@ import { useState, useEffect } from "react";
 export default function RequestButton({ job }) {
     const { user } = useUser();
     const [requested, setRequested] = useState(false);
-    const key = `requested_${user?.user_id}_${job.listing_id}`;
+
+    const key = `requested_${user?.user_id}_${job?.listing_id}`;
 
     useEffect(() => {
-        if (!user) return;
-        const isRequested = localStorage.getItem(key);
-        setRequested(!!isRequested);
-        }, [user, job.listing_id]);
-
-        async function handleRequestToggle() {
-            if (!user) return;
-
-            const url = "http://localhost:8000/requests";
-
-            try {
-                const res = await fetch(url, {
-                    method: requested ? "DELETE" : "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        listing_id: job?.listing_id,
-                        worker_id: user?.user_id,
-                    }),
-                });
-
-                if (!res.ok) {
-                    if (!requested && res.status === 400) {
-                        alert("Job already requested");
-                        setRequested(true);
-                        localStorage.setItem(key, "true");
-                        return;
-                    }
-                    throw new Error("Failed to toggle request");
-                }
-
-                if (requested) {
-                    alert("Job request canceled");
-                    setRequested(false);
-                    localStorage.removeItem(key);
-                } else {
-                    alert("Job requested!");
-                    setRequested(true);
-                    localStorage.setItem(key, "true");
-                }
-            } catch (err) {
-                console.error("Error toggling job request:", err);
-            }
+        if (!user || !job) return;
+        if (localStorage.getItem(key)) {
+            setRequested(true);
         }
+    }, [user, job]);
 
+    async function handleRequestJob() {
+        try {
+            const res = await fetch("http://localhost:8000/requests", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    listing_id: job.listing_id,
+                    worker_id: user.user_id,
+                }),
+            });
 
+            if (!res.ok) {
+                if (res.status === 400) {
+                    alert("Job already requested");
+                } else {
+                    alert("Failed to request job");
+                }
+                return;
+            }
 
-        //async function handleRequestJob() {
-        //if (!user || cancelled) return;
-        //if (!requested && !cancelled) {
-        //    alert("Job request cancelled");
-        //    setRequested(false);
-         ///   setCancelled(true);
-        //    localStorage.removeItem(`requested_${user.user_id}_${job.listing_id}`)
-         //   return;
-       // }
+            alert("Job request sent!");
+            setRequested(true);
+            localStorage.setItem(key, "true");
 
-    // async function handleRequestJob() {
+        } catch (err) {
+            console.error("Error requesting job:", err);
+        }
+    }
 
-    //     try {
-    //         const res = await fetch("http://localhost:8000/requests", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify({
-    //                 listing_id: job?.listing_id,
-    //                 worker_id: user?.user_id,
-    //             }),
-    //         });
+    async function handleCancelRequest() {
+        try {
+            const res = await fetch(`http://localhost:8000/requests/${user.user_id}/${job.listing_id}`, {
+                method: "DELETE",
+            });
 
-    //         if (!res.ok) {
-    //             if (res.status === 400) {
-    //                 alert("Job already requested");
-    //                 setRequested(true);
-    //                 localStorage.setItem(`requested_${user.user_id}_${job.listing_id}`, "true");
-    //                 return;
-    //             }
-    //         }
+            if (!res.ok) {
+                alert("Failed to cancel request");
+                return;
+            }
 
-    //         alert("Job request sent!");
-    //         setRequested(true);
-    //         localStorage.setItem(`requested_${user.user_id}_${job.listing_id}`, "true");
+            alert("Request canceled.");
+            setRequested(false);
+            localStorage.removeItem(key);
 
-    //     } catch (err) {
-    //         console.error("Error requesting job:", err);
-    //     }
-    // }
+        } catch (err) {
+            console.error("Error cancelling request:", err);
+        }
+    }
 
     return (
         <button
             onClick={(e) => {
                 e.stopPropagation();
-                handleRequestToggle();
+                requested ? handleCancelRequest() : handleRequestJob();
             }}
             style={{
-                opacity: requested ? 0.5 : 1,
-                cursor: requested ? "not-allowed" : "pointer"
+                opacity: 1,
+                backgroundColor: requested ? "#f44336" : "#4CAF50",
+                color: "white",
+                padding: "8px 12px",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer"
             }}
         >
-            {requested ? "Requested" : "Request Job"}
+            {requested ? "Cancel Request" : "Request Job"}
         </button>
     );
 }
