@@ -53,3 +53,18 @@ async def update_request_status(
     db.commit()
     db.refresh(db_request)
     return db_request
+
+@router.delete("/{worker_id}/{listing_id}")
+async def delete_request(worker_id: int, listing_id: int, db: Session = Depends(get_db)):
+    db_request = (
+        db.query(DB_Requests)
+        .filter(DB_Requests.worker_id == worker_id, DB_Requests.listing_id == listing_id)
+        .first()
+    )
+    if not db_request:
+        raise HTTPException(status_code=404, detail="Request not found")
+
+    db.delete(db_request)
+    db.commit()
+    return {"detail": "Request deleted"}
+
