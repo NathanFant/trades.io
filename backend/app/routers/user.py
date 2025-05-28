@@ -4,7 +4,7 @@ from app.models import DB_User
 from app.schema import UserCreate, UserOut, UserLogin
 from app.database import get_db
 import bcrypt
-from datetime import datetime
+from datetime import date
 
 
 router = APIRouter(prefix="/users", tags=["users"])
@@ -27,7 +27,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
         email=user.email,
         password=hashed_pw,
         # is_admin defaults to False
-        created_at=datetime.now().strftime("%m-%d-%Y %H:%M:%S"),
+        created_at=date.today(),
     )
 
     db.add(db_user)
@@ -49,6 +49,7 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
         raise HTTPException(status_code=401, detail="Invalid email or password")
 
     return db_user
+
 
 @router.get("/@{user_name}", response_model=UserOut)
 def get_user_by_name(user_name: str, db: Session = Depends(get_db)):
