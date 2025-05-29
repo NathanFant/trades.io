@@ -38,7 +38,7 @@ export default function Header() {
                     ) : (
                         <>
                             <button className="postjob-button" onClick={() => navigate("/create")}>Post a Job</button>
-                            <button className="profile-button" onClick={() => alert("Profile clicked")}>{user?.username}</button>
+                            <button className="profile-button" onClick={() => navigate("/profile")}>{user?.username}</button>
                             <button className="profile-button" onClick={handleLogOut}>Logout</button>
                         </>
                     )}
