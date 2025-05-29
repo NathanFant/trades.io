@@ -23,10 +23,10 @@ export default function AskMoreModal({ job, onClose }) {
       };
 
       await emailjs.send(
-        "your_service_id",      // Replace with your EmailJS service ID
-        "your_template_id",     // Replace with your EmailJS template ID
+        "service_vul2dde",      // Replace with your EmailJS service ID
+        "template_djjqdxm",     // Replace with your EmailJS template ID
         templateParams,
-        "your_public_key"       // Replace with your EmailJS public key
+        "zba6T16xnJE2l6KWW"       // Replace with your EmailJS public key
       );
 
       setStatus("Message sent!");
