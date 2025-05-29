@@ -26,11 +26,51 @@ export default function CheckBox({ skill, user_id }) {
         (s) => s.skill_name === skill.skill_name
         );
 
-    function handleSkillAssign(e) {
+    useEffect(() => {
+        setIsChecked(hasSkillByName);
+    }, [userSkills]);
+
+    async function handleSkillAssign(e) {
         setIsChecked(e.target.checked);
+        if (!isChecked) {
+            const addSkill = async () => {
+                const skillCreate = {
+                    user_id: user?.user_id ,
+                    skill_id: skill?.skill_id,
+                };
+                try {
+                    await fetch(`http://localhost:8000/skill`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json"},
+                        body: JSON.stringify(skillCreate)
+                    });
+                    alert(`You have added ${skill?.skill_name} to your skills`);
+                } catch (error) {
+                    console.error("Error adding new skill", error);
+                }
+            }
+            addSkill();
+        } else {
+            const removeSkill = async () => {
+                const skillDelete = {
+                    user_id: user?.user_id ,
+                    skill_id: skill?.skill_id,
+                }
+                try {
+                    await fetch(`http://localhost:8000/skill`, {
+                        method: "DELETE",
+                        headers: { "Content-Type": "application/json"},
+                        body: JSON.stringify(skillDelete),
+                    });
+                    alert(`You have remove ${skill?.skill_name} from your skills`)
+                } catch (error) {
+                    console.error("Error removing skill", error);
+                }
+            }
+            removeSkill();
+        }
 
     }
-
 
     return (
         <>

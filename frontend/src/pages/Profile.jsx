@@ -1,5 +1,5 @@
 import Skills from "../components/Skills";
-import { useUser } from "../context/UserContext";
+//import { useUser } from "../context/UserContext";
 import ListingCard from "../components/ListingCard";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
