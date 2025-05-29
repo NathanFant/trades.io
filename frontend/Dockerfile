@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY ./package*.json ./
 
-RUN npm install && npm install react-router
+RUN npm install && npm install react-router && npm install @emailjs/browser
 
 COPY . .
 

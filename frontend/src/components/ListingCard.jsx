@@ -1,14 +1,19 @@
 import RequestButton from "./RequestButton";
+import AskMoreModal from "./AskMoreModal";
+import { useState } from "react";
+
 
 export default function ListingCard({ job, expandedId, setExpandedId }) {
+  const [showModal, setShowModal] = useState(false);
+
 
     const handleToggleExpand = (id) => {
         setExpandedId(expandedId === id ? null : id);
     };
 
-    const handleAskMore = (id) => {
-        alert(`Asked for more info on job ID: ${id}`);
-    };
+    const handleAskMore = () => {
+    setShowModal(true);
+  };
 
     return (
         <>
@@ -41,9 +46,14 @@ export default function ListingCard({ job, expandedId, setExpandedId }) {
                 </div>
               )}
             </div>
+            {showModal && (
+              <AskMoreModal
+                job={job}
+                onClose={() => setShowModal(false)}
+              />
+            )}
 
         </>
     )
-
 
 }
