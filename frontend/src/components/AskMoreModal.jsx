@@ -6,6 +6,7 @@ export default function AskMoreModal({ job, onClose }) {
   const { user } = useUser();
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
+  const [isSent, setIsSent] = useState(false);
 
   const sendEmail = async () => {
     try {
@@ -30,6 +31,7 @@ export default function AskMoreModal({ job, onClose }) {
       );
 
       setStatus("Message sent!");
+      setIsSent(true);
       setTimeout(onClose, 2000);
     } catch (err) {
       console.error("Email send failed", err);
@@ -47,7 +49,7 @@ export default function AskMoreModal({ job, onClose }) {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <button onClick={sendEmail}>Send</button>
+        <button onClick={sendEmail} disabled={isSent}>Send</button>
         <button onClick={onClose}>Cancel</button>
         <p>{status}</p>
       </div>

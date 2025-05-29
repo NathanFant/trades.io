@@ -7,7 +7,7 @@ import { useUser } from "../context/UserContext";
 export default function ListingCard({ job, expandedId, setExpandedId }) {
   const [showModal, setShowModal] = useState(false);
   const { user } = useUser();
-  const isPoster = user && job.listing_id == user.user_id
+  const isPoster = user && job.listing_id === user.user_id
 
 
 
