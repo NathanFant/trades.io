@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import CheckBox from "./CheckBox";
 
-export default function Skills() {
+export default function Skills({ user_id }) {
 
     const [skills, setSkills] = useState([]);
 
     useEffect(() => {
         const fetchSkills = async () => {
             try {
-                const res = await fetch("http://localhost:8000/skill");
+                const res = await fetch(`http://localhost:8000/skill`);
                 const data = await res.json();
                 setSkills(data);
             } catch (error) {
@@ -22,7 +22,7 @@ export default function Skills() {
     return (
         <>
             {skills.map((skill, index) => (
-                <CheckBox key={index} skill={skill} />
+                <CheckBox user_id={user_id} key={index} skill={skill} />
             ))}
 
         </>
