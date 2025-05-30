@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from app.models import DB_Listings
 from sqlalchemy.orm import Session
 from app.schema import ListingCreate, ListingOut
@@ -39,3 +39,13 @@ async def get_listing_by_id(listing_id: int, db: Session = Depends(get_db)):
     return ListingOut.model_validate(
         db.query(DB_Listings).filter(DB_Listings.listing_id == listing_id).first()
     )
+
+@router.delete("/listings/{listing_id}")
+async def delete_listing(listing_id: int, db: Session = Depends(get_db)):
+    listing = db.query(DB_Listings).filter(DB_Listings.listing_id == listing_id).first()
+    if not listing:
+        raise HTTPException(status_code=404, detail="Listing not found")
+
+    db.delete(listing)
+    db.commit()
+    return {"detail": "Listing deleted successfully"}

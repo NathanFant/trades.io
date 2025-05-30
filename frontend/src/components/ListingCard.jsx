@@ -7,7 +7,7 @@ import { useUser } from "../context/UserContext";
 export default function ListingCard({ job, expandedId, setExpandedId }) {
   const [showModal, setShowModal] = useState(false);
   const { user } = useUser();
-  const isPoster = user && job.listing_id === user.user_id
+  const isPoster = user && job.poster_id === user.user_id
 
 
 
@@ -17,6 +17,26 @@ export default function ListingCard({ job, expandedId, setExpandedId }) {
 
   const handleAskMore = () => {
     setShowModal(true);
+  };
+
+  const handleDelete = async () => {
+    if (!window.confirm("Are you sure you want to delete this listing?")) return;
+
+    try {
+      const res = await fetch(`http://localhost:8000/listings/${job.listing_id}`, {
+        method: "DELETE",
+      });
+
+      if (res.ok) {
+        alert("Listing deleted.");
+        window.location.reload();
+      } else {
+        alert("Failed to delete listing.");
+      }
+    } catch (err) {
+      console.error("Delete failed", err);
+      alert("Error deleting listing.");
+    }
   };
 
   return (
@@ -46,6 +66,18 @@ export default function ListingCard({ job, expandedId, setExpandedId }) {
                     }}
                   > Ask More </button>
                 )}
+                {isPoster && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDelete();
+                  }}
+                  style={{ color: "red", marginTop: "8px" }}
+                >
+                  Delete Post
+                </button>
+              )}
+
               </div>
             </div>
           )}
