@@ -44,12 +44,13 @@ export default function AskMoreModal({ job, onClose }) {
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <h3>Send a message to {job.title} poster</h3>
         <textarea
+          className="textarea-box"
           rows="5"
           placeholder="Write your question here..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-        <button onClick={sendEmail} disabled={isSent}>Send</button>
+        <button onClick={sendEmail} disabled={isSent} style={{marginRight: "1rem"}} >Send</button>
         <button onClick={onClose}>Cancel</button>
         <p>{status}</p>
       </div>

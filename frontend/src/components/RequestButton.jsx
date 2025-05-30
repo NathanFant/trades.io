@@ -45,7 +45,7 @@ export default function RequestButton({ job }) {
         return;
       }
 
-      alert("Job request sent!");
+      // alert("Job request sent!");
       setHasRequested(true);
     } catch (err) {
       console.error("Error requesting job:", err);
@@ -63,7 +63,7 @@ export default function RequestButton({ job }) {
         return;
       }
 
-      alert("Request canceled.");
+      // alert("Request canceled.");
       setHasRequested(false);
     } catch (err) {
       console.error("Error cancelling request:", err);
