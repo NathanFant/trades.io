@@ -4,6 +4,6 @@ export default function NotFound() {
 
 
     return (
-        <div>Go fuck yourself, you're lost</div>
+        <div>404 Page not found!</div>
     )
 }
