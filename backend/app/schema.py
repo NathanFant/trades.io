@@ -36,6 +36,7 @@ class ListingBase(BaseModel):
     latitude: float = 1
     longitude: float = 1
     price: float
+    required_skill: str = "undefined"
 
 
 class ListingCreate(ListingBase):

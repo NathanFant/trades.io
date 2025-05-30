@@ -35,6 +35,7 @@ class DB_Listings(Base):
     price = Column(Float, nullable=False)
     completed = Column(Boolean, default=False)
     pending = Column(Boolean, default=False)
+    required_skill = Column(String(50), nullable=False)
     poster_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"))
     created_at = Column(Date, default=date.today)
 

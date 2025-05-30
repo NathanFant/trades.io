@@ -9,11 +9,11 @@ VALUES
 
 INSERT INTO listings (title, description, latitude, longitude, price, poster_id, created_at)
 VALUES
-('Need my sink fixed', 'The pipes under my sink are leaking', 50, 17.38, 100.00, 1, '2025-05-21'),
+('Need my sink fixed', 'The pipes under my sink are leaking', 34.74, -92.29, 100.00, 1, '2025-05-21'),
 ('Need my yard mowed', 'I need my yard mowed', 34.74, -92.29, 99.00, 2, '2025-05-21'),
-('Need my deck painted', 'old paint needs stripped and repainted', 22.21, 17.38, 98.00, 3, '2025-05-21'),
-('Need help with internet', 'landscaper cut my cables out back and my internet is out', 55.11, 17.38, 97.00, 4, '2025-05-21'),
-('NO COOL AIR!', 'AC AINT WORKIN!', 17.38, 17.38, 96.00, 5, '2025-05-21');
+('Need my deck painted', 'old paint needs stripped and repainted', 34.74, -92.29, 98.00, 3, '2025-05-21'),
+('Need help with internet', 'landscaper cut my cables out back and my internet is out', 34.74, -92.29, 97.00, 4, '2025-05-21'),
+('NO COOL AIR!', 'AC AINT WORKIN!', 34.74, -92.29, 96.00, 5, '2025-05-21');
 
 INSERT INTO requests (listing_id, worker_id, created_at)
 VALUES
@@ -35,7 +35,8 @@ VALUES
 ('hvac'),
 ('handyman'),
 ('landscaping'),
-('cleaning');
+('cleaning'),
+('other');
 
 INSERT INTO user_skills (user_id, skill_id)
 VALUES

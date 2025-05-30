@@ -16,6 +16,7 @@ CREATE TABLE listings (
   price FLOAT NOT NULL,
   completed BOOL DEFAULT FALSE,
   pending BOOL DEFAULT FALSE,
+  required_skill VARCHAR(50) DEFAULT 'undefined',
   poster_id INT REFERENCES users(user_id) ON DELETE CASCADE,
   created_at DATE NOT NULL
   );
