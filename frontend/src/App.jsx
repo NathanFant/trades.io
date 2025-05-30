@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Login from "./pages/Login";
 import CreateListing from "./pages/CreateListing";
 import Profile from "./pages/Profile";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<CreateListing />} />
         <Route path="/profile/:user_id" element={<Profile />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
