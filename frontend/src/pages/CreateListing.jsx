@@ -6,18 +6,48 @@ export default function CreateListing() {
 
     const navigate = useNavigate();
     const { user } = useUser();
+
     const [listingTitle, setListingTitle] = useState("");
     const [listingDesc, setListingDesc] = useState("");
     const [listingPay, setListingPay] = useState("");
+    const [zipcode, setZipcode] = useState("");
 
+    const getCoordsFromZipcode = async (zipcode) => {
+        const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${zipcode},+united+states&key=772594138f0f41488225603a3fd8ca9c`);
 
+        const data = await response.json();
+        if (data.results.length > 0) {
+            const { lat, lng } = data.results[0].geometry;
+            const roundedCoords = {
+                lat: parseFloat(lat.toFixed(2)),
+                lng: parseFloat(lng.toFixed(2))
+            }
+
+            return roundedCoords;
+        } else {
+            throw new Error("No coordinates found for Zipcode");
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const { lat, lng } = await getCoordsFromZipcode(zipcode)
+
+        const rawPay = parseFloat(listingPay);
+        if (isNaN(rawPay) || rawPay < 0) {
+            alert("Pay must be a valid number.");
+            return;
+        }
+
+        const formattedPay = parseFloat(rawPay.toFixed(2));
+
         const listingJson = {
             title: listingTitle,
             description: listingDesc,
-            price: listingPay,
+            latitude: lat,
+            longitude: lng,
+            price: formattedPay,
             poster_id: user?.user_id,
         }
 
@@ -42,39 +72,45 @@ export default function CreateListing() {
                 <h2>Create a job posting</h2>
                 <form className="listing-form" onSubmit={(e) => handleSubmit(e)} >
                     Job Title<input
-                    className="input-box"
-                    placeholder="Job..."
-                    value={listingTitle}
-                    onChange={(e) => {
-                        setListingTitle(e.target.value)
-                    }}
-                    required
-                    />
+                        className="input-box"
+                        placeholder="Job"
+                        value={listingTitle}
+                        onChange={(e) => {
+                            setListingTitle(e.target.value)
+                        }}
+                        required/>
                     Job Description<textarea
-                    className="input-box textarea-box"
-                    placeholder="Description..."
-                    value={listingDesc}
-                    onChange={(e) => {
-                        setListingDesc(e.target.value)
-                    }}
-                    rows={6}
-                    required
-                     />
+                        className="textarea-box input-box"
+                        placeholder="Description"
+                        value={listingDesc}
+                        onChange={(e) => {
+                            setListingDesc(e.target.value)
+                        }}
+                        rows={6}
+                        required/>
+                    Job Zipcode<input
+                        className="input-box"
+                        placeholder="5 Digit Zipcode"
+                        type="text"
+                        value={zipcode}
+                        onChange={(e) => {
+                            const zip = e.target.value.replace(/\D/g, ""); //digits only
+                            if (zip.length <= 5) setZipcode(zip);
+                        }}
+                        required />
                     Job Pay<input
-                    className="input-box"
-                    placeholder="Pay..."
-                    value={listingPay}
-                    onChange={(e) => {
-                        setListingPay(e.target.value)
-                    }}
-                    required
-                    />
+                        className="input-box"
+                        placeholder="Pay"
+                        type="text"
+                        value={listingPay}
+                        onChange={(e) => {
+                            const input = e.target.value;
+                            const sanitized = input.replace(/[^\d.]/g, "")
+                            setListingPay(sanitized)
+                        }}
+                        required />
                     <button type="submit" className="create-button">Post job</button>
-
                 </form>
-
-
-
             </div>
         </>
     )
