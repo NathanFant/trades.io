@@ -25,6 +25,7 @@ body {
   width: 100%;
   max-width: 600px;
   display: flex;
+  margin-bottom: 2rem;
 }
 
 header {
@@ -73,16 +74,19 @@ header {
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 600px;
+  margin: 0.5rem auto;
 }
 
 .job-card {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 0.5rem;
-  margin: 0.5rem auto;
-  width: 90%;
+  width: 100%;
   max-width: 600px;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
 }
 
 .job-card h2 {
@@ -156,6 +160,7 @@ button:hover {
 }
 
 .textarea-box {
+  font-family: system-ui, sans-serif;
   resize: none;
   height: 11rem;
   word-wrap: break-word;
@@ -219,12 +224,12 @@ button:hover {
   }
 
   .homepage-main-content {
-    width: 95%;
+    width: 100%;
     padding: 0;
   }
 
   .job-card {
-    width: 95%;
+    width: 100%;
     margin: 0.5rem auto;
   }
 }
@@ -271,11 +276,16 @@ button:hover {
   padding: 0.25rem 0.5rem;
   border-radius: 16px;
   font-size: 0.8rem;
-  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .skillPill:hover {
   background-color: #2e2b2b;
   color: white
+}
+
+.four-o-four {
+  text-align: center;
+  color: white;
+
 }

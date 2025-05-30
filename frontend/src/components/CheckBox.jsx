@@ -73,17 +73,27 @@ export default function CheckBox({ skill, user_id }) {
     }
 
     return (
-        <div className="skillPill" onClick={() => handleSkillAssign()}>
+            <>
+                {(hasSkillByName || user.user_id === parseInt(user_id)) && (
+                    <div
+                    className="skillPill"
+                    style={user.user_id === parseInt(user_id) ? {cursor: "pointer"} : {cursor: "default"}}
+                    onClick={user.user_id === parseInt(user_id) ? () => handleSkillAssign() : undefined}
+                    >
+                        <label style={user.user_id === parseInt(user_id) ? {cursor: "pointer"} : {cursor: "default"}} >
+                            {skill.skill_name[0].toUpperCase() + skill.skill_name.slice(1)} {" "}
+                        </label>
+                        {(user.user_id === parseInt(user_id)) && (
+                            <input
+                                style={user.user_id === parseInt(user_id) ? {cursor: "pointer"} : {cursor: "default"}}
+                                key={skill.skill_id}
+                                type="checkbox"
+                                checked={isChecked}
+                            />
+                        )}
+                    </div>
+                )}
 
-            {(hasSkillByName || user.user_id === parseInt(user_id)) && <label>
-                {skill.skill_name[0].toUpperCase() + skill.skill_name.slice(1)} {" "}
-            </label>}
-            {(user.user_id === parseInt(user_id)) &&
-            <input
-                key={skill.skill_id}
-                type="checkbox"
-                checked={isChecked}
-            />}
-        </div>
+            </>
     )
 }
