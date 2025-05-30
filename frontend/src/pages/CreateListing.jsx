@@ -17,8 +17,13 @@ export default function CreateListing() {
 
         const data = await response.json();
         if (data.results.length > 0) {
-            const { lat, long } = data.results[0].geometry;
-            return { lat, long };
+            const { lat, lng } = data.results[0].geometry;
+            const roundedCoords = {
+                lat: parseFloat(lat.toFixed(2)),
+                lng: parseFloat(lng.toFixed(2))
+            }
+
+            return roundedCoords;
         } else {
             throw new Error("No coordinates found for Zipcode");
         }
