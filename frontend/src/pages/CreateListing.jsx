@@ -6,11 +6,11 @@ export default function CreateListing() {
 
     const navigate = useNavigate();
     const { user } = useUser();
+
     const [listingTitle, setListingTitle] = useState("");
     const [listingDesc, setListingDesc] = useState("");
     const [listingPay, setListingPay] = useState("");
     const [zipcode, setZipcode] = useState("");
-    const [isValid, setIsValid] = useState(false); // This will evaluate the length/characters of zipcode
 
     const getCoordsFromZipcode = async (zipcode) => {
         const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${zipcode},+united+states&key=772594138f0f41488225603a3fd8ca9c`);
@@ -32,14 +32,22 @@ export default function CreateListing() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { lat, long } = await getCoordsFromZipcode(zipcode)
+        const { lat, lng } = await getCoordsFromZipcode(zipcode)
+
+        const rawPay = parseFloat(listingPay);
+        if (isNaN(rawPay) || rawPay < 0) {
+            alert("Pay must be a valid number.");
+            return;
+        }
+
+        const formattedPay = parseFloat(rawPay.toFixed(2));
 
         const listingJson = {
             title: listingTitle,
             description: listingDesc,
             latitude: lat,
-            longitude: long,
-            price: listingPay,
+            longitude: lng,
+            price: formattedPay,
             poster_id: user?.user_id,
         }
 
@@ -86,24 +94,23 @@ export default function CreateListing() {
                         type="text"
                         value={zipcode}
                         onChange={(e) => {
-                            setZipcode(e.target.value)
+                            const zip = e.target.value.replace(/\D/g, ""); //digits only
+                            if (zip.length <= 5) setZipcode(zip);
                         }}
-                        required={true} />
+                        required />
                     Job Pay<input
                         className="input-box"
                         placeholder="Pay"
+                        type="text"
                         value={listingPay}
                         onChange={(e) => {
-                            setListingPay(e.target.value)
+                            const input = e.target.value;
+                            const sanitized = input.replace(/[^\d.]/g, "")
+                            setListingPay(sanitized)
                         }}
-                        required={true}
-                        />
+                        required />
                     <button type="submit" className="create-button">Post job</button>
-
                 </form>
-
-
-
             </div>
         </>
     )
