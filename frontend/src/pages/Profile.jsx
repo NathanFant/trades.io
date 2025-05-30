@@ -8,6 +8,7 @@ export default function Profile() {
     const [listings, setListings] = useState([]);
     const [expandedId, setExpandedId] = useState(null);
     const [pageUser, setPageUser] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const { user_id } = useParams();
 
     useEffect(() => {
@@ -19,10 +20,13 @@ export default function Profile() {
             setListings(data);
           } catch (err) {
             console.error("Error fetching listings:", err);
+          } finally {
+            setIsLoading(false);
           }
         };
 
         const fetchUsername = async () => {
+            setIsLoading(true);
             try {
                 const res = await fetch(`http://localhost:8000/users/${user_id}`)
                 if (!res.ok) throw new Error("Failed to fetch user");
@@ -36,6 +40,10 @@ export default function Profile() {
         fetchUsername();
         fetchListings();
     }, [user_id]);
+
+    if (isLoading) {
+        return;
+    }
 
     if (!pageUser) {
         return <NotFound />
