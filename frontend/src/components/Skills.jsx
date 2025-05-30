@@ -10,7 +10,7 @@ export default function Skills({ user_id }) {
             try {
                 const res = await fetch(`http://localhost:8000/skill`);
                 const data = await res.json();
-                setSkills(data);
+                setSkills(data.slice(1, 11));
             } catch (error) {
                 console.error("Error fetching user", error);
             }

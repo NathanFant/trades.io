@@ -1,11 +1,10 @@
 import Skills from "../components/Skills";
-//import { useUser } from "../context/UserContext";
 import ListingCard from "../components/ListingCard";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
+import NotFound from "./NotFound";
 
 export default function Profile() {
-    //const { user } = useUser()
     const [listings, setListings] = useState([]);
     const [expandedId, setExpandedId] = useState(null);
     const [pageUser, setPageUser] = useState("");
@@ -37,6 +36,10 @@ export default function Profile() {
         fetchUsername();
         fetchListings();
     }, [user_id]);
+
+    if (!pageUser) {
+        return <NotFound />
+    }
 
     return (
         <>
