@@ -20,11 +20,12 @@ export default function Skills({ user_id }) {
     }, [])
 
     return (
-        <>
+        <div className="skills-container">
             {skills.map((skill, index) => (
                 <CheckBox user_id={user_id} key={index} skill={skill} />
-            ))}
 
-        </>
+            ))}
+        </div>
+
     )
 }

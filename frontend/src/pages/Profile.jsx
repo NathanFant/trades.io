@@ -41,23 +41,26 @@ export default function Profile() {
         return <NotFound />
     }
 
-    return (
-        <>
-        <div>{pageUser?.username}</div>
-        <Skills user_id={user_id}/>
-        {listings.map((job, index) => (
+   return (
+    <div>
+      <h1 style={{ marginBottom: "0.5rem", textAlign: "center" }}>{pageUser?.username}'s Profile</h1>
+      <Skills user_id={user_id} />
+      <hr style={{ width: "100%", margin: "1.5rem 0" }} />
+        <h2 style={{ textAlign: "center" }}>Job Listings</h2>
+      <div className="listings">
+        {listings.length === 0 ? (
+          <p>No job listings yet.</p>
+        ) : (
+          listings.map((job, index) => (
             <ListingCard
-                key={index}
-                job={job}
-                expandedId={expandedId}
-                setExpandedId={setExpandedId}
+              key={index}
+              job={job}
+              expandedId={expandedId}
+              setExpandedId={setExpandedId}
             />
-        ))}
-
-
-        </>
-
-
-
-    )
+          ))
+        )}
+      </div>
+    </div>
+  );
 }

@@ -30,8 +30,8 @@ export default function CheckBox({ skill, user_id }) {
         setIsChecked(hasSkillByName);
     }, [userSkills]);
 
-    async function handleSkillAssign(e) {
-        setIsChecked(e.target.checked);
+    async function handleSkillAssign() {
+        setIsChecked(!isChecked);
         if (!isChecked) {
             const addSkill = async () => {
                 const skillCreate = {
@@ -73,7 +73,8 @@ export default function CheckBox({ skill, user_id }) {
     }
 
     return (
-        <>
+        <div className="skillPill" onClick={() => handleSkillAssign()}>
+
             {(hasSkillByName || user.user_id === parseInt(user_id)) && <label>
                 {skill.skill_name[0].toUpperCase() + skill.skill_name.slice(1)} {" "}
             </label>}
@@ -82,8 +83,7 @@ export default function CheckBox({ skill, user_id }) {
                 key={skill.skill_id}
                 type="checkbox"
                 checked={isChecked}
-                onChange={(e) => handleSkillAssign(e)}
             />}
-        </>
+        </div>
     )
 }
