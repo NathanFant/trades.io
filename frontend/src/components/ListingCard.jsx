@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useUser } from "../context/UserContext";
 
 
-export default function ListingCard({ job, expandedId, setExpandedId }) {
+export default function ListingCard({ job, expandedId, setExpandedId, handleDeleteFromParent }) {
   const [showModal, setShowModal] = useState(false);
   const { user } = useUser();
   const isPoster = user && job.poster_id === user.user_id
@@ -29,7 +29,7 @@ export default function ListingCard({ job, expandedId, setExpandedId }) {
 
       if (res.ok) {
         alert("Listing deleted.");
-        window.location.reload();
+        handleDeleteFromParent(job.listing_id);
       } else {
         alert("Failed to delete listing.");
       }
