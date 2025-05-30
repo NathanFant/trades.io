@@ -25,67 +25,71 @@ const HomePage = () => {
     fetchListings();
   }, []);
 
- const adMessages = [
-  "Hire skilled local workers today!",
-  "Post your job and get matched fast!",
-  "Need help? Find pros nearby!",
+  const handleDeleteFromParent = (id) => {
+    setListings((prev) => prev.filter((job) => job.listing_id !== id))
+  }
+  const adMessages = [
+    "Hire skilled local workers today!",
+    "Post your job and get matched fast!",
+    "Need help? Find pros nearby!",
 ];
 
-const AdRotator = () => {
-  const [current, setCurrent] = useState(0);
+  const AdRotator = () => {
+    const [current, setCurrent] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % adMessages.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setCurrent((prev) => (prev + 1) % adMessages.length);
+      }, 3000);
+      return () => clearInterval(interval);
+    }, []);
 
-  return (
-    <div className="ads-container">
-      <p>{adMessages[current]}</p>
-    </div>
-  );
-};
+    return (
+      <div className="ads-container">
+        <p>{adMessages[current]}</p>
+      </div>
+    );
+  };
 
 
   const filteredListings = listings.filter((job) =>
     job.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
- return (
-  <div className="homepage-container-with-ads">
-    <div className="ads-left">
-      <AdRotator />
-    </div>
+  return (
+    <div className="homepage-container-with-ads">
+      <div className="ads-left">
+        <AdRotator />
+      </div>
 
-    <div className="homepage-main-content">
-      
+      <div className="homepage-main-content">
 
-      <div className="listings">
-        <Searchbar setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
-        {loading ? (
-          <p>Loading jobs...</p>
-        ) : filteredListings.length === 0 ? (
-          <p>No jobs found.</p>
-        ) : (
-          filteredListings.map((job, index) => (
-            <ListingCard
-              key={index}
-              job={job}
-              expandedId={expandedId}
-              setExpandedId={setExpandedId}
-            />
-          ))
-        )}
+
+        <div className="listings">
+          <Searchbar setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+          {loading ? (
+            <p>Loading jobs...</p>
+          ) : filteredListings.length === 0 ? (
+            <p>No jobs found.</p>
+          ) : (
+            filteredListings.map((job, index) => (
+              <ListingCard
+                key={index}
+                job={job}
+                expandedId={expandedId}
+                setExpandedId={setExpandedId}
+                handleDeleteFromParent={handleDeleteFromParent}
+              />
+            ))
+          )}
+        </div>
+      </div>
+
+      <div className="ads-right">
+        <AdRotator />
       </div>
     </div>
-
-    <div className="ads-right">
-      <AdRotator />
-    </div>
-  </div>
-);
+  );
 
 };
 export default HomePage;
