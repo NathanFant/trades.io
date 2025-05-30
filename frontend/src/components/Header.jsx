@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useUser } from "../context/UserContext";
 import { useLogin } from "../context/LoginContext";
 
+
 export default function Header() {
     const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState(false);

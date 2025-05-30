@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import { useUser } from "../context/UserContext";
 
+
 export default function CreateListing() {
 
     const navigate = useNavigate();
