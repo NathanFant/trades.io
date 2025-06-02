@@ -111,6 +111,7 @@ header {
 
 .job-card:hover {
   background-color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
 }
 
 .job-card.expanded {
@@ -215,10 +216,13 @@ button:hover {
   font-weight: bold;
   position: fixed;
   height: 100%;
-  height: 400px;
+  max-height: 400px;
   transform: translateX(-50%);
 }
 
+.ads-container:hover {
+  cursor: pointer;
+}
 
 @media (max-width: 768px) {
   .homepage-container-with-ads {
