@@ -1,14 +1,13 @@
 import RequestButton from "./RequestButton";
 import AskMoreModal from "./AskMoreModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "../context/UserContext";
 
 
 export default function ListingCard({ job, expandedId, setExpandedId, handleDeleteFromParent }) {
   const [showModal, setShowModal] = useState(false);
   const { user } = useUser();
-  const isPoster = user && job.poster_id === user.user_id
-
+  const isPoster = user && job.poster_id === user.user_id;
 
 
   const handleToggleExpand = (id) => {
@@ -50,6 +49,12 @@ export default function ListingCard({ job, expandedId, setExpandedId, handleDele
           <h2>{job.title}</h2>
           <span className="job-price">${job.price.toFixed(2)}</span>
         </div>
+        {user && user.is_admin && <button
+          className="admin-delete-button delete-button"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDelete();
+          }}>Admin Delete</button>}
         <p>{job.description}</p>
           {expandedId === job.listing_id && (
             <div className="job-details">
@@ -68,6 +73,7 @@ export default function ListingCard({ job, expandedId, setExpandedId, handleDele
                 )}
                 {isPoster && (
                 <button
+                className="delete-button"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleDelete();
