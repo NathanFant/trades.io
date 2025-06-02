@@ -31,6 +31,7 @@ export default function Header() {
             <header>
                 <h2 onClick={() => navigate('/')} className="homepage-link">Trades.io</h2>
                 <div className="right-header-container">
+                    <button className="home-button" onClick={() => navigate('/')}>Home</button>
                     {!loggedIn ? (
                         <>
                             <button className="login-button" onClick={() => handleAccClick(false)}>Login</button>
