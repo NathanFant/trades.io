@@ -3,6 +3,7 @@ import ListingCard from "../components/ListingCard";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import NotFound from "./NotFound";
+import { AdLeft, AdRight } from "../components/AdBanner";
 
 export default function Profile() {
     const [listings, setListings] = useState([]);
@@ -50,25 +51,31 @@ export default function Profile() {
     }
 
    return (
-    <div>
-      <h1 style={{ marginBottom: "0.5rem", textAlign: "center" }}>{pageUser?.username}'s Profile</h1>
-      <Skills user_id={user_id} />
-      <hr style={{ width: "100%", margin: "1.5rem 0" }} />
+    <div className="homepage-container-with-ads">
+      <AdLeft />
+      <div className="homepage-main-content">
+        <h1 style={{ marginBottom: "0.5rem", textAlign: "center" }}>
+          {pageUser?.username}'s Profile
+        </h1>
+        <Skills user_id={user_id} />
+        <hr style={{ width: "100%", margin: "1.5rem 0" }} />
         <h2 style={{ textAlign: "center" }}>Job Listings</h2>
-      <div className="listings">
-        {listings.length === 0 ? (
-          <p>No job listings yet.</p>
-        ) : (
-          listings.map((job, index) => (
-            <ListingCard
-              key={index}
-              job={job}
-              expandedId={expandedId}
-              setExpandedId={setExpandedId}
-            />
-          ))
-        )}
+        <div className="listings">
+          {listings.length === 0 ? (
+            <p>No job listings yet.</p>
+          ) : (
+            listings.map((job, index) => (
+              <ListingCard
+                key={index}
+                job={job}
+                expandedId={expandedId}
+                setExpandedId={setExpandedId}
+              />
+            ))
+          )}
+        </div>
       </div>
+      <AdRight />
     </div>
   );
 }

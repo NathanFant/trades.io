@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import ListingCard from "../components/ListingCard";
 import Searchbar from "../components/Searchbar";
+import { AdLeft, AdRight } from "../components/AdBanner";
+
 
 const HomePage = () => {
   const [listings, setListings] = useState([]);
@@ -28,29 +30,6 @@ const HomePage = () => {
   const handleDeleteFromParent = (id) => {
     setListings((prev) => prev.filter((job) => job.listing_id !== id))
   }
-  const adMessages = [
-    "Hire skilled local workers today!",
-    "Post your job and get matched fast!",
-    "Need help? Find pros nearby!",
-];
-
-  const AdRotator = () => {
-    const [current, setCurrent] = useState(0);
-
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setCurrent((prev) => (prev + 1) % adMessages.length);
-      }, 3000);
-      return () => clearInterval(interval);
-    }, []);
-
-    return (
-      <div className="ads-container">
-        <p>{adMessages[current]}</p>
-      </div>
-    );
-  };
-
 
   const filteredListings = listings.filter((job) =>
     job.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -58,9 +37,7 @@ const HomePage = () => {
 
   return (
     <div className="homepage-container-with-ads">
-      <div className="ads-left">
-        <AdRotator />
-      </div>
+      <AdLeft />
 
       <div className="homepage-main-content">
 
@@ -85,9 +62,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="ads-right">
-        <AdRotator />
-      </div>
+      <AdRight />
     </div>
   );
 
