@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "../context/UserContext";
 
 
@@ -12,6 +12,9 @@ export default function CreateListing() {
     const [listingDesc, setListingDesc] = useState("");
     const [listingPay, setListingPay] = useState("");
     const [zipcode, setZipcode] = useState("");
+
+    const [skills, setSkills] = useState([]);
+    const [selectedSkillId, setSelectedSkillId] = useState("");
 
     const getCoordsFromZipcode = async (zipcode) => {
         const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${zipcode},+united+states&key=772594138f0f41488225603a3fd8ca9c`);
@@ -30,6 +33,20 @@ export default function CreateListing() {
         }
     };
 
+    useEffect(() => {
+        const fetchSkills = async () => {
+            try {
+                const response = await fetch("http://localhost:8000/skill");
+                const data = await response.json();
+                setSkills(data);
+            } catch (error) {
+                console.error("Error fetching skills:", error);
+            }
+        };
+
+        fetchSkills();
+    }, [])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -43,6 +60,11 @@ export default function CreateListing() {
 
         const formattedPay = parseFloat(rawPay.toFixed(2));
 
+        if (!selectedSkillId) {
+            alert("Please select a skill for the job posting.");
+            return;
+        }
+
         const listingJson = {
             title: listingTitle,
             description: listingDesc,
@@ -50,6 +72,7 @@ export default function CreateListing() {
             longitude: lng,
             price: formattedPay,
             poster_id: user?.user_id,
+            required_skill: skills.find(skill => skill.skill_id === parseInt(selectedSkillId))?.skill_name,
         }
 
         try {
@@ -89,6 +112,18 @@ export default function CreateListing() {
                         }}
                         rows={6}
                         required/>
+                    Required Skill <select
+                        className="input-box"
+                        value={selectedSkillId}
+                        onChange={(e) => setSelectedSkillId(e.target.value)}
+                        required>
+                        <option value="">Select a Skill</option>
+                        {skills.map((skill) => (
+                            <option key={skill.skill_id} value={skill.skill_id}>
+                                {skill.skill_name.charAt(0).toUpperCase() + skill.skill_name.slice(1)}
+                            </option>
+                        ))}
+                    </select>
                     Job Zipcode<input
                         className="input-box"
                         placeholder="5 Digit Zipcode"
