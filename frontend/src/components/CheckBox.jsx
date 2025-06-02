@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useUser } from "../context/UserContext";
 import { useEffect } from "react";
 
-export default function CheckBox({ skill, user_id }) {
+export default function CheckBox({ skill, user_id=9999999 }) {
 
     const [isChecked, setIsChecked] = useState(false);
     const [userSkills, setUserSkills] = useState([]);
@@ -74,13 +74,13 @@ export default function CheckBox({ skill, user_id }) {
 
     return (
             <>
-                {(hasSkillByName || user.user_id === parseInt(user_id)) && (
+                {(hasSkillByName || user?.user_id === parseInt(user_id)) && (
                     <div
                     className="skillPill"
-                    style={user.user_id === parseInt(user_id)  && isChecked ? {cursor: "pointer", backgroundColor: "lightBlue"} : {cursor: "default", backgroundColor: "gray"}}
-                    onClick={user.user_id === parseInt(user_id) ? () => handleSkillAssign() : undefined}
+                    style={user?.user_id === parseInt(user_id)  && isChecked ? {cursor: "pointer", backgroundColor: "lightBlue"} : {cursor: "default", backgroundColor: "gray"}}
+                    onClick={user?.user_id === parseInt(user_id) ? () => handleSkillAssign() : undefined}
                     >
-                        <label style={user.user_id === parseInt(user_id) ? {cursor: "pointer"} : {cursor: "default"}} >
+                        <label style={user?.user_id === parseInt(user_id) ? {cursor: "pointer"} : {cursor: "default"}} >
                             {skill.skill_name[0].toUpperCase() + skill.skill_name.slice(1)}
                         </label>
                         {/* {(user.user_id === parseInt(user_id)) && (
