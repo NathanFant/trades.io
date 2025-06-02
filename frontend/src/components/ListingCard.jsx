@@ -50,6 +50,7 @@ export default function ListingCard({ job, expandedId, setExpandedId, handleDele
           <span className="job-price">${job.price.toFixed(2)}</span>
         </div>
         {user && user.is_admin && <button
+          className="admin-delete-button delete-button"
           onClick={(e) => {
             e.stopPropagation();
             handleDelete();
@@ -72,6 +73,7 @@ export default function ListingCard({ job, expandedId, setExpandedId, handleDele
                 )}
                 {isPoster && (
                 <button
+                className="delete-button"
                   onClick={(e) => {
                     e.stopPropagation();
                     handleDelete();
