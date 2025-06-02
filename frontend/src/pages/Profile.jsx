@@ -1,8 +1,9 @@
 import Skills from "../components/Skills";
 import ListingCard from "../components/ListingCard";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom"
 import NotFound from "./NotFound";
+import { AdLeft, AdRight } from "../components/AdBanner";
 
 export default function Profile() {
   const [listings, setListings] = useState([]);
@@ -74,51 +75,56 @@ export default function Profile() {
     fetchRequestedListings();
   }, [user_id]);
 
-  if (isLoading) return;
+  if (isLoading) {
+    return <h2 style={{color: "white", textAlign: "center"}} >Loading...</h2>
+  }
 
-  if (!pageUser) return <NotFound />;
+  if (!pageUser && isLoading) {
+    return <NotFound />
+  }
 
   return (
-    <div>
-      <h1 style={{ marginBottom: "0.5rem", textAlign: "center" }}>
-        {pageUser?.username}'s Profile
-      </h1>
-
-      <Skills user_id={user_id} />
-
-      <hr style={{ width: "100%", margin: "1.5rem 0" }} />
-      <h2 style={{ textAlign: "center" }}>Job Listings</h2>
-      <div className="listings">
-        {listings.length === 0 ? (
-          <p>No job listings yet.</p>
-        ) : (
-          listings.map((job, index) => (
-            <ListingCard
-              key={index}
-              job={job}
-              expandedId={expandedId}
-              setExpandedId={setExpandedId}
-            />
-          ))
-        )}
+    <div className="homepage-container-with-ads">
+      <AdLeft />
+      <div className="homepage-main-content">
+        <h1 style={{ marginBottom: "0.5rem", textAlign: "center", color: "white" }}>
+          {pageUser?.username}'s Profile
+        </h1>
+        <Skills user_id={user_id} />
+        <hr style={{ width: "100%", margin: "1.5rem 0" }} />
+        <h2 style={{ textAlign: "center", color: "white" }}>Job Listings</h2>
+        <div className="listings">
+          {listings.length === 0 ? (
+            <p>No job listings yet.</p>
+          ) : (
+            listings.map((job, index) => (
+              <ListingCard
+                key={index}
+                job={job}
+                expandedId={expandedId}
+                setExpandedId={setExpandedId}
+              />
+            ))
+          )}
+        </div>
+        <hr style={{ width: "100%", margin: "1.5rem 0" }} />
+        <h2 style={{color: "white"}}>Jobs You've Requested</h2>
+        <div className="listings">
+          {requestedListings.length === 0 ? (
+            <p>No requested jobs yet.</p>
+          ) : (
+            requestedListings.map((job, index) => (
+              <ListingCard
+                key={index}
+                job={job}
+                expandedId={expandedId}
+                setExpandedId={setExpandedId}
+              />
+            ))
+          )}
+        </div>
       </div>
-
-      <hr style={{ width: "100%", margin: "1.5rem 0" }} />
-      <h2 style={{ textAlign: "center" }}>Jobs You've Requested</h2>
-      <div className="listings">
-        {requestedListings.length === 0 ? (
-          <p>No requested jobs yet.</p>
-        ) : (
-          requestedListings.map((job, index) => (
-            <ListingCard
-              key={index}
-              job={job}
-              expandedId={expandedId}
-              setExpandedId={setExpandedId}
-            />
-          ))
-        )}
-      </div>
+      <AdRight />
     </div>
   );
 }
