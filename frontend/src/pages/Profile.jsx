@@ -1,17 +1,20 @@
 import Skills from "../components/Skills";
 import ListingCard from "../components/ListingCard";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import NotFound from "./NotFound";
 import { AdLeft, AdRight } from "../components/AdBanner";
+import { useUser } from "../context/UserContext";
 
 export default function Profile() {
+  const { user } = useUser();
+  const { user_id } = useParams();
+
   const [listings, setListings] = useState([]);
   const [requestedListings, setRequestedListings] = useState([]);
   const [expandedId, setExpandedId] = useState(null);
   const [pageUser, setPageUser] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { user_id } = useParams();
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -72,15 +75,19 @@ export default function Profile() {
 
     fetchUsername();
     fetchListings();
-    fetchRequestedListings();
-  }, [user_id]);
+
+    if (user?.user_id === parseInt(user_id)) {
+      fetchRequestedListings();
+    }
+
+  }, [user_id, user]);
 
   if (isLoading) {
-    return <h2 style={{color: "white", textAlign: "center"}} >Loading...</h2>
+    return <h2 style={{ color: "white", textAlign: "center" }}>Loading...</h2>;
   }
 
   if (!pageUser && isLoading) {
-    return <NotFound />
+    return <NotFound />;
   }
 
   return (
@@ -107,22 +114,27 @@ export default function Profile() {
             ))
           )}
         </div>
-        <hr style={{ width: "100%", margin: "1.5rem 0" }} />
-        <h2 style={{color: "white"}}>Jobs You've Requested</h2>
-        <div className="listings">
-          {requestedListings.length === 0 ? (
-            <p>No requested jobs yet.</p>
-          ) : (
-            requestedListings.map((job, index) => (
-              <ListingCard
-                key={index}
-                job={job}
-                expandedId={expandedId}
-                setExpandedId={setExpandedId}
-              />
-            ))
-          )}
-        </div>
+
+        {user?.user_id === parseInt(user_id) && (
+          <>
+            <hr style={{ width: "100%", margin: "1.5rem 0" }} />
+            <h2 style={{ color: "white" }}>Jobs You've Requested</h2>
+            <div className="listings">
+              {requestedListings.length === 0 ? (
+                <p>No requested jobs yet.</p>
+              ) : (
+                requestedListings.map((job, index) => (
+                  <ListingCard
+                    key={index}
+                    job={job}
+                    expandedId={expandedId}
+                    setExpandedId={setExpandedId}
+                  />
+                ))
+              )}
+            </div>
+          </>
+        )}
       </div>
       <AdRight />
     </div>
