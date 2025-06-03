@@ -23,7 +23,7 @@ export default function CheckBox({ skill, user_id=9999999 }) {
     }, [user_id])
 
     const hasSkillByName = userSkills.some(
-        (s) => s.skill_name === skill.skill_name
+        (s) => s?.skill_name === skill?.skill_name
         );
 
     useEffect(() => {
