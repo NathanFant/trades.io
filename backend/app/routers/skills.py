@@ -17,7 +17,21 @@ router = APIRouter(prefix="/skill", tags=["skills"])
 #         raise HTTPException(status_code=400, detail="Skill already in database")
 
 
-# output skill information
+async def assign_skill(user_skill: UserSkillCreate, db: Session):
+
+    db_user_skill = DB_user_skills(**user_skill.model_dump())
+
+    db.add(db_user_skill)
+    db.commit()
+    db.refresh(db_user_skill)
+
+    user = UserSkillOut.model_validate(
+        {"user_id": user_skill.user_id, "skill_id": user_skill.skill_id}
+    )
+
+    return user
+
+
 @router.get("/id/{id}", response_model=SkillOut)
 async def get_skill_by_skill_id(id: int, db: Session = Depends(get_db)):
     skill = db.query(DB_skills).filter(DB_skills.skill_id == id).first()
@@ -45,17 +59,7 @@ async def get_skill_by_name(name: str, db: Session = Depends(get_db)):
 @router.post("/", response_model=UserSkillOut)
 async def assign_user_skill(user_skill: UserSkillCreate, db: Session = Depends(get_db)):
 
-    db_user_skill = DB_user_skills(**user_skill.model_dump())
-
-    db.add(db_user_skill)
-    db.commit()
-    db.refresh(db_user_skill)
-
-    user = UserSkillOut.model_validate(
-        {"user_id": user_skill.user_id, "skill_id": user_skill.skill_id}
-    )
-
-    return user
+    return await assign_skill(user_skill, db)
 
 
 @router.delete("/")

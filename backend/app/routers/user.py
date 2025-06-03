@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.models import DB_User
-from app.schema import UserCreate, UserOut, UserLogin
+from app.schema import UserCreate, UserOut, UserLogin, UserSkillCreate
 from app.database import get_db
 import bcrypt
 from datetime import date
+from app.routers.skills import assign_skill
 
 
 router = APIRouter(prefix="/users", tags=["users"])
@@ -33,6 +34,16 @@ async def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
+
+    await assign_skill(
+        UserSkillCreate.model_validate(
+            {
+                "user_id": db_user.user_id,
+                "skill_id": 12,
+            }
+        ),
+        db,
+    )
 
     return db_user
 
