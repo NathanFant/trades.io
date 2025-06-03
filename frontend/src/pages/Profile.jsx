@@ -82,6 +82,10 @@ export default function Profile() {
 
   }, [user_id, user]);
 
+  const handleDeleteFromParent = (id) => {
+    setListings((prev) => prev.filter((job) => job.listing_id !== id))
+  }
+
   if (isLoading) {
     return <h2 style={{ color: "white", textAlign: "center" }}>Loading...</h2>;
   }
@@ -110,6 +114,7 @@ export default function Profile() {
                 job={job}
                 expandedId={expandedId}
                 setExpandedId={setExpandedId}
+                handleDeleteFromParent={handleDeleteFromParent}
               />
             ))
           )}
