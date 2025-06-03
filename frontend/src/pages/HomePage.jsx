@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ListingCard from "../components/ListingCard";
 import Searchbar from "../components/Searchbar";
 import { AdLeft, AdRight } from "../components/AdBanner";
+import FilterBySkill from "../components/FilterBySkill";
 
 
 const HomePage = () => {
@@ -9,6 +10,7 @@ const HomePage = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [expandedId, setExpandedId] = useState(null);
+  const [filterTerm, setFilterTerm] = useState("");
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -35,6 +37,11 @@ const HomePage = () => {
     job.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const filteredListingsBySkill = filteredListings.filter((skill) =>
+    skill.required_skill.includes(filterTerm)
+  );
+
+
   return (
     <div className="homepage-container-with-ads">
       <AdLeft />
@@ -44,12 +51,13 @@ const HomePage = () => {
 
         <div className="listings">
           <Searchbar setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+          <FilterBySkill  setFilterTerm={setFilterTerm} />
           {loading ? (
             <p>Loading jobs...</p>
           ) : filteredListings.length === 0 ? (
             <p>No jobs found.</p>
           ) : (
-            filteredListings.map((job, index) => (
+            filteredListingsBySkill.map((job, index) => (
               <ListingCard
                 key={index}
                 job={job}
