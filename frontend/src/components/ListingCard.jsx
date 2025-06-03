@@ -27,14 +27,14 @@ export default function ListingCard({ job, expandedId, setExpandedId, handleDele
       });
 
       if (res.ok) {
-        alert("Listing deleted.");
+
         handleDeleteFromParent(job.listing_id);
       } else {
         alert("Failed to delete listing.");
       }
     } catch (err) {
       console.error("Delete failed", err);
-      alert("Error deleting listing.");
+
     }
   };
 

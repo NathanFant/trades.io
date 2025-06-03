@@ -41,7 +41,7 @@ export default function RequestButton({ job }) {
 
       if (!res.ok) {
         const errorData = await res.json();
-        alert(errorData.detail || "Failed to request job");
+
         return;
       }
 
@@ -59,7 +59,7 @@ export default function RequestButton({ job }) {
       });
 
       if (!res.ok) {
-        alert("Failed to cancel request");
+       
         return;
       }
 
