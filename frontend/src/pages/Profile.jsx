@@ -1,7 +1,7 @@
 import Skills from "../components/Skills";
 import ListingCard from "../components/ListingCard";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import NotFound from "./NotFound";
 import { AdLeft, AdRight } from "../components/AdBanner";
 import { useUser } from "../context/UserContext";
@@ -9,7 +9,7 @@ import { useUser } from "../context/UserContext";
 export default function Profile() {
   const { user } = useUser();
   const { user_id } = useParams();
-
+  const navigate = useNavigate();
   const [listings, setListings] = useState([]);
   const [requestedListings, setRequestedListings] = useState([]);
   const [expandedId, setExpandedId] = useState(null);
@@ -65,7 +65,10 @@ export default function Profile() {
       setIsLoading(true);
       try {
         const res = await fetch(`http://localhost:8000/users/${user_id}`);
-        if (!res.ok) throw new Error("Failed to fetch user");
+        if (!res.ok) {
+          navigate("/404");
+          return;
+        }
         const data = await res.json();
         setPageUser(data);
       } catch (error) {
