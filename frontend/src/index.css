@@ -6,8 +6,8 @@ a {
 body {
   margin: 0rem;
   padding: 0rem;
-  font-family: system-ui, sans-serif;
-  background: rgb(61, 76, 128);
+  font-family: "Ubuntu", sans-serif;
+  background:linear-gradient(90deg,rgb(4, 34, 77) 0%, rgb(16, 52, 166) 50%, rgb(15, 82, 186) 100%);
   color: #111;
   overflow-x: hidden;
 }
@@ -70,6 +70,7 @@ header {
   border-radius: 4px;
   box-sizing: border-box;
   display: block;
+  font-family: "Ubuntu", sans-serif;
   margin-bottom: 0.5rem;
 }
 
@@ -130,6 +131,7 @@ button {
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
+  font-family: "Ubuntu", sans-serif;
   cursor: pointer;
 }
 
@@ -169,7 +171,7 @@ button:hover {
 }
 
 .textarea-box {
-  font-family: system-ui, sans-serif;
+  font-family: "Ubuntu", sans-serif;
   resize: none;
   height: 11rem;
   word-wrap: break-word;
