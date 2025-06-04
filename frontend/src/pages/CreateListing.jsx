@@ -17,7 +17,7 @@ export default function CreateListing() {
     const [selectedSkillId, setSelectedSkillId] = useState("");
 
     const getCoordsFromZipcode = async (zipcode) => {
-        const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${zipcode},+united+states&key=772594138f0f41488225603a3fd8ca9c`);
+        const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${zipcode},+united+states&key=ee0965be84ed463a965a07366b4a7e72`);
 
         const data = await response.json();
         if (data.results.length > 0) {
