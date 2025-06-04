@@ -19,7 +19,7 @@ export default function FilterBySkill({ setFilterTerm }) {
 
     function handleSkillSelect(e) {
         let skill = e.target.value
-        if (skill === "Select a Skill") {
+        if (skill === "Filter by Skill") {
             skill = ""
         }
         setSelectedSkill(skill)
