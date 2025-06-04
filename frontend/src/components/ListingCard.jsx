@@ -1,11 +1,15 @@
 import RequestButton from "./RequestButton";
 import AskMoreModal from "./AskMoreModal";
-import { useEffect, useState } from "react";
+import RequestJobModal from "./RequestJobModal";
+import { useState } from "react";
 import { useUser } from "../context/UserContext";
 
 
+
 export default function ListingCard({ job, expandedId, setExpandedId, handleDeleteFromParent }) {
-  const [showModal, setShowModal] = useState(false);
+  const [showAskModal, setShowAskModal] = useState(false);
+  const [showRequestModal, setShowRequestModal] = useState(false);
+  const [hasRequested, setHasRequested] = useState(false);
   const { user } = useUser();
   const isPoster = user && job.poster_id === user.user_id;
 
@@ -15,7 +19,7 @@ export default function ListingCard({ job, expandedId, setExpandedId, handleDele
   };
 
   const handleAskMore = () => {
-    setShowModal(true);
+    setShowAskModal(true);
   };
 
   const handleDelete = async () => {
@@ -62,7 +66,13 @@ export default function ListingCard({ job, expandedId, setExpandedId, handleDele
               <p><strong>Price:</strong> ${job.price.toFixed(2)}</p>
               <p><strong>Posted:</strong> {job.created_at}</p>
               <div className="job-buttons">
-                {!isPoster && <RequestButton job={job} />}
+                {!isPoster && <RequestButton
+                  job={job}
+                  onOpenModal={() => setShowRequestModal(true)}
+                  hasRequested={hasRequested}
+                  setHasRequested={setHasRequested} />}
+                  {showRequestModal && ( <RequestJobModal job={job} onClose={() => setShowRequestModal(false)}
+                  setHasRequested={setHasRequested} />)}
                 {!isPoster && user && (
                   <button
                     onClick={(e) => {
@@ -88,10 +98,10 @@ export default function ListingCard({ job, expandedId, setExpandedId, handleDele
             </div>
           )}
       </div>
-      {showModal && (
+      {showAskModal && (
         <AskMoreModal
           job={job}
-          onClose={() => setShowModal(false)}
+          onClose={() => setShowAskModal(false)}
         />
       )}
     </>
