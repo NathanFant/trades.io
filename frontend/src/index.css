@@ -43,7 +43,7 @@ body {
   width: 100%;
   max-width: 600px;
   display: flex;
-  margin-bottom: 2rem;
+  margin-bottom: .5rem;
 }
 
 header {
