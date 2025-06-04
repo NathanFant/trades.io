@@ -29,14 +29,14 @@ export default function FilterBySkill({ setFilterTerm }) {
 
     return (
         <div className="filter-by-skill">
-            <label htmlFor="skill-select">Filter by Skill:</label>
+            <label htmlFor="skill-select"></label>
             <select
                 className="input-box"
                 value={selectedSkill}
                 onChange={(e) => handleSkillSelect(e)}
                 required
             >
-                <option value={selectedSkill.skill_name}>Select a Skill</option>
+                <option value={selectedSkill.skill_name}>Filter by Skill</option>
                 {skills.map((skill) => (
                     <option key={skill.skill_id} value={skill.skill_name}>
                         {skill.skill_name.charAt(0).toUpperCase() + skill.skill_name.slice(1)}
