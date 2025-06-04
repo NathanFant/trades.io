@@ -327,7 +327,8 @@ button:hover {
   flex: 1;
   padding: 0.5rem;
   font-size: 1rem;
+}
 
-  .filter-by-skill {
-    color: white
-  }
+.filter-by-skill {
+  color: white
+}
