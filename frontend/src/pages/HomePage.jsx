@@ -45,10 +45,7 @@ const HomePage = () => {
   return (
     <div className="homepage-container-with-ads">
       <AdLeft />
-
       <div className="homepage-main-content">
-
-
         <div className="listings">
           <SearchFilterBar
             searchTerm={searchTerm}
@@ -56,7 +53,6 @@ const HomePage = () => {
             setFilterTerm={setFilterTerm}
           />
           {loading ? (
-
             <p>Loading jobs...</p>
           ) : filteredListings.length === 0 ? (
             <p>No jobs found.</p>
@@ -73,7 +69,6 @@ const HomePage = () => {
           )}
         </div>
       </div>
-
       <AdRight />
     </div>
   );
