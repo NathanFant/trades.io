@@ -1,9 +1,8 @@
 import { useUser } from "../context/UserContext";
 import { useEffect, useState } from "react";
 
-export default function RequestButton({ job }) {
+export default function RequestButton({ job, onOpenModal, hasRequested, setHasRequested }) {
   const { user } = useUser();
-  const [hasRequested, setHasRequested] = useState(false);
   const [loading, setLoading] = useState(true);
 
 
@@ -28,30 +27,6 @@ export default function RequestButton({ job }) {
     checkRequestStatus();
   }, [user, job]);
 
-  const handleRequestJob = async () => {
-    try {
-      const res = await fetch("http://localhost:8000/requests", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          listing_id: job.listing_id,
-          worker_id: user.user_id,
-        }),
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json();
-
-        return;
-      }
-
-      // alert("Job request sent!");
-      setHasRequested(true);
-    } catch (err) {
-      console.error("Error requesting job:", err);
-    }
-  };
-
   const handleCancelRequest = async () => {
     try {
       const res = await fetch(`http://localhost:8000/requests/${user.user_id}/${job.listing_id}`, {
@@ -59,7 +34,6 @@ export default function RequestButton({ job }) {
       });
 
       if (!res.ok) {
-       
         return;
       }
 
@@ -76,7 +50,11 @@ export default function RequestButton({ job }) {
     <button
       onClick={(e) => {
         e.stopPropagation();
-        hasRequested ? handleCancelRequest() : handleRequestJob();
+        if (hasRequested) {
+          handleCancelRequest();
+        } else {
+          onOpenModal(job);
+        }
       }}
       style={{
         opacity: 1,
