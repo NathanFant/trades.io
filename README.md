@@ -1,5 +1,12 @@
+
+# FOR WINDOWS USERS
 # docker-compose up --build in root dir
 
-# docker-compose down before commit
-
-# docker-compose up once built
+# FOR MAC USERS
+# docker-compose up --build in root dir
+# In a new console tab
+# cd capstone-group-2/frontend
+# npm install
+# npm install react-router
+# npm install @emailjs/browser
+# npm run dev
