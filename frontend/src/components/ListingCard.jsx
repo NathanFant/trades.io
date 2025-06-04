@@ -64,6 +64,7 @@ export default function ListingCard({ job, expandedId, setExpandedId, handleDele
             <div className="job-details">
               <p><strong>Full Description:</strong> {job.description}</p>
               <p><strong>Price:</strong> ${job.price.toFixed(2)}</p>
+              <p><strong>Location:</strong> {job.latitude}</p>
               <p><strong>Posted:</strong> {job.created_at}</p>
               <div className="job-buttons">
                 {!isPoster && <RequestButton
