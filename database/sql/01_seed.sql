@@ -7,13 +7,13 @@ VALUES
 ('Vince', 'vince@gmail.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', TRUE, '2025-05-19'),
 ('Johnny', 'Johnny@example.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', FALSE, '2025-05-20');
 
-INSERT INTO listings (title, description, latitude, longitude, price, poster_id, created_at)
+INSERT INTO listings (title, description, latitude, longitude, price, required_skill, poster_id, created_at)
 VALUES
-('Need my sink fixed', 'The pipes under my sink are leaking', 34.74, -92.29, 100.00, 1, '2025-05-21'),
-('Need my yard mowed', 'I need my yard mowed', 34.74, -92.29, 99.00, 2, '2025-05-21'),
-('Need my deck painted', 'old paint needs stripped and repainted', 34.74, -92.29, 98.00, 3, '2025-05-21'),
-('Need help with internet', 'landscaper cut my cables out back and my internet is out', 34.74, -92.29, 97.00, 4, '2025-05-21'),
-('NO COOL AIR!', 'AC AINT WORKIN!', 34.74, -92.29, 96.00, 5, '2025-05-21');
+('Need my sink fixed', 'The pipes under my sink are leaking', 34.74, -92.29, 100.00, 'plumbing', 1, '2025-05-21'),
+('Need my yard mowed', 'I need my yard mowed', 34.74, -92.29, 99.00, 'landscaping', 2, '2025-05-21'),
+('Need my deck painted', 'old paint needs stripped and repainted', 34.74, -92.29, 98.00, 'handyman', 3, '2025-05-21'),
+('Need help with internet', 'landscaper cut my cables out back and my internet is out', 34.74, -92.29, 97.00, 'other', 4, '2025-05-21'),
+('NO COOL AIR!', 'AC AINT WORKIN!', 34.74, -92.29, 96.00, 'hvac', 5, '2025-05-21');
 
 INSERT INTO requests (listing_id, worker_id, created_at)
 VALUES
