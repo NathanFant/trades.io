@@ -29,12 +29,15 @@ export default function Header() {
     return (
         <>
             <header>
-
-                <img src={Hammer}
-                    width="40px"
-                    height="40px"
-                />
-                <h2 onClick={() => navigate('/')} className="homepage-link">Trades.io</h2>
+                <div
+                onClick={() => navigate('/')}
+                className="header-left">
+                    <img src={Hammer}
+                        width="40px"
+                        height="40px"
+                    />
+                    <h2 className="homepage-link">Trades.io</h2>
+                </div>
                 <div className="right-header-container">
                     <button className="home-button" onClick={() => navigate('/')}>Home</button>
                     {!loggedIn ? (

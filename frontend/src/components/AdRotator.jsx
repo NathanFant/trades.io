@@ -23,7 +23,7 @@ export default function AdRotator() {
     if (adImages.length > 0 ) {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % adImages.length);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
   }}, []);
 
