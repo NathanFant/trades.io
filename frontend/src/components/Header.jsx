@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useUser } from "../context/UserContext";
 import { useLogin } from "../context/LoginContext";
-
+import Hammer from "../assets/Hammer.png";
 
 export default function Header() {
     const navigate = useNavigate();
@@ -29,6 +29,11 @@ export default function Header() {
     return (
         <>
             <header>
+
+                <img src={Hammer}
+                    width="40px"
+                    height="40px"
+                />
                 <h2 onClick={() => navigate('/')} className="homepage-link">Trades.io</h2>
                 <div className="right-header-container">
                     <button className="home-button" onClick={() => navigate('/')}>Home</button>
@@ -44,13 +49,13 @@ export default function Header() {
                             <button className="profile-button" onClick={handleLogOut}>Logout</button>
                         </>
                     )}
-               </div>
+                </div>
 
             </header>
         </>
     )
 }
 
-{/* Home | Search for jobs... | Login  (if logged in, Post a Job | Profile) */}
-{/* We decided to take out search for jobs on all pages, except for the home page. */}
-{/* login-postjob-container will be aligned to the right side, pending header css */}
+{/* Home | Search for jobs... | Login  (if logged in, Post a Job | Profile) */ }
+{/* We decided to take out search for jobs on all pages, except for the home page. */ }
+{/* login-postjob-container will be aligned to the right side, pending header css */ }
