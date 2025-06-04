@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import ListingCard from "../components/ListingCard";
-import Searchbar from "../components/Searchbar";
 import { AdLeft, AdRight } from "../components/AdBanner";
-import FilterBySkill from "../components/FilterBySkill";
+import SearchFilterBar from "../components/SearchFilterBar";
+
 
 
 const HomePage = () => {
@@ -50,9 +50,13 @@ const HomePage = () => {
 
 
         <div className="listings">
-          <Searchbar setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
-          <FilterBySkill  setFilterTerm={setFilterTerm} />
+          <SearchFilterBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            setFilterTerm={setFilterTerm}
+          />
           {loading ? (
+
             <p>Loading jobs...</p>
           ) : filteredListings.length === 0 ? (
             <p>No jobs found.</p>

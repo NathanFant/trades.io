@@ -303,3 +303,24 @@ button:hover {
   color: white;
 
 }
+
+.search-filter-bar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.search-filter-bar input[type="text"] {
+  flex: 2;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.search-filter-bar select {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
