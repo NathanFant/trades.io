@@ -3,7 +3,7 @@ import AskMoreModal from "./AskMoreModal";
 import RequestJobModal from "./RequestJobModal";
 import { useState } from "react";
 import { useUser } from "../context/UserContext";
-
+import DisplayCity from "./DisplayCity";
 
 
 export default function ListingCard({ job, expandedId, setExpandedId, handleDeleteFromParent }) {
@@ -64,7 +64,7 @@ export default function ListingCard({ job, expandedId, setExpandedId, handleDele
             <div className="job-details">
               <p><strong>Full Description:</strong> {job.description}</p>
               <p><strong>Price:</strong> ${job.price.toFixed(2)}</p>
-              <p><strong>Location:</strong> {job.latitude}</p>
+              <DisplayCity job={job} />
               <p><strong>Posted:</strong> {job.created_at}</p>
               <div className="job-buttons">
                 {!isPoster && <RequestButton
