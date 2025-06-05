@@ -1,14 +1,3 @@
-# FOR WINDOWS USERS
-# docker-compose up --build in root dir
-
-# FOR MAC USERS
-# docker-compose up --build in root dir
-# In a new console tab
-# cd capstone-group-2/frontend
-# npm install
-# npm install react-router
-# npm install @emailjs/browser
-# npm run dev
 
 Trades.io "Real Work. Real Workers. Right Now"
 
@@ -24,8 +13,20 @@ Trades.io is a simple and intuitive blue collar job website that anyone can unde
 MVP goals
  -To have a functional website that will connect workers with jobs.
  -Our site is meant to be simple to use, simple to understand, and overall effective.
- -Implement user login, job poting and requesting, and user profile management.
+ -Implement user login, job posting and requesting, and user profile management.
  -Enable email communication between job posters and requesters when a job is requested.
+
+User features
+  -As a user I want to see people hiring for tasks with pay and location
+  -As a user I want to be able to list tasks
+  -As a user I want to be able to advertise my services
+  -As a job lister, I want to be able to review job takers
+  -As a user, be able to search
+  -Login: I'm a worker
+  -Login: I'm looking for a worker
+Admin Features
+  -As an Admin I want to be able to delete accounts/posts
+
 
 User Stories
 
@@ -69,24 +70,39 @@ Filters and search functions
 
     1. Clone the repo [git@ssh.gitlab.galvanize.com:trenttwilkins02/capstone-group-2.git]
 
-    2. Set up our backend
-        cd backend
-        docker compose up --build
+    2. FOR WINDOWS USERS
+        -docker-compose up --build (in root dir)
 
-    3. Set up our Frontend
-        cd Frontend
-        npm install
-        npm run dev
+    3. FOR MAC USERS
+        -docker-compose up --build (in root dir)
+        -In a new console tab
+        -cd capstone-group-2/frontend
+        -npm install
+        -npm install react-router
+        -npm install @emailjs/browser
+        -npm run dev
+
 
  Deployment Link? If we are going to do that.
 
- Challenges Faced and solutions - group task
-    -Agreeing on direction
-    -Which features to implement
+ Challenges Faced and solutions
+    -Agreeing on direction, and discussing it together.
+    -Which features to implement, and how to implement them.
+    -Using Git.
+    -Mac and Windows incompatibility and containers between the two operating systems.
+    -Styling whether it be inline or all in CSS.
+    -Multiple branches working on the same files. making sure we are able to get our merges in line.
+    -While all of the challenges were different we were able to solve them through a combination of communication, working together, and research.
 
 
- Lessons Learned and Team Workflow Notes - group task
-    -
+ Lessons Learned and Team Workflow Notes
+    -Branches smoothed out our production, allowing us to work on multiple tasks. There was a learning curve but our organization and flow improved as we progressed
+    -Everyone has their own working style, and we learned to meld them together.
+    -Importance of sticking to a structure that we make before coding begins. Staying in line with our plans and not getting sidetracked with new ideas before our current tasks are completed.
+    -Communication between team members working on different branches. Making sure that we know what files are being touched, to minimize the chance of overlap.
+    -Building a full stack application is difficult and everyone has something different to bring to the table. We all have our specialties.
+    -Simple can be better, there is no need to reinvent the wheel.
+    -Creativity is fun, pickles.
 
  Future Feature Ideas
     -Add tagline to header
@@ -94,6 +110,8 @@ Filters and search functions
     -In app messaging feature
     -A system for ratings and reviews.
     -Completion confirmation for a job. This will allow a profile to show a workers job history, and build their credibility.
+    -Worker accreditation by Admins
+    -Add picture of completed jobs
 
 Trello Board link:
     https://trello.com/b/fT9jyrAz/blue-collar-fiverr
