@@ -109,7 +109,7 @@ export default function Profile() {
         <h2 style={{ textAlign: "center", color: "white" }}>Job Listings</h2>
         <div className="listings">
           {listings.length === 0 ? (
-            <p>No job listings yet.</p>
+            <p style={{color:'white'}}>No job listings yet.</p>
           ) : (
             listings.map((job, index) => (
               <ListingCard
@@ -129,7 +129,7 @@ export default function Profile() {
             <h2 style={{ color: "white" }}>Jobs You've Requested</h2>
             <div className="listings">
               {requestedListings.length === 0 ? (
-                <p>No requested jobs yet.</p>
+                <p style={{color: "white"}}>No requested jobs yet.</p>
               ) : (
                 requestedListings.map((job, index) => (
                   <ListingCard
