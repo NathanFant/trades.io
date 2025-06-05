@@ -150,7 +150,7 @@ export default function CreateListing() {
                             setListingPay(sanitized)
                         }}
                         required />
-                    <button type="submit" className="create-button">Post job</button>
+                    <button type="submit" className="create-button" style={{ width: "125px", margin: "0 auto" }}>Post job</button>
                 </form>
             </div>
         </>
