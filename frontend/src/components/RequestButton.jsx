@@ -1,10 +1,11 @@
 import { useUser } from "../context/UserContext";
 import { useEffect, useState } from "react";
+import CancelJobModal from "./CancelJobModal";
 
 export default function RequestButton({ job, onOpenModal, hasRequested, setHasRequested }) {
   const { user } = useUser();
   const [loading, setLoading] = useState(true);
-
+  const [showCancelModal, setShowCancelModal] = useState(false);
 
   useEffect(() => {
     const checkRequestStatus = async () => {
@@ -27,46 +28,39 @@ export default function RequestButton({ job, onOpenModal, hasRequested, setHasRe
     checkRequestStatus();
   }, [user, job]);
 
-  const handleCancelRequest = async () => {
-    try {
-      const res = await fetch(`http://localhost:8000/requests/${user.user_id}/${job.listing_id}`, {
-        method: "DELETE",
-      });
-
-      if (!res.ok) {
-        return;
-      }
-
-      // alert("Request canceled.");
-      setHasRequested(false);
-    } catch (err) {
-      console.error("Error cancelling request:", err);
-    }
-  };
-
   if (!user || loading) return null;
 
   return (
-    <button
-      onClick={(e) => {
-        e.stopPropagation();
-        if (hasRequested) {
-          handleCancelRequest();
-        } else {
-          onOpenModal(job);
-        }
-      }}
-      style={{
-        opacity: 1,
-        backgroundColor: hasRequested ? "#f44336" : "#4CAF50",
-        color: "white",
-        padding: "8px 12px",
-        border: "none",
-        borderRadius: "4px",
-        cursor: "pointer"
-      }}
-    >
-      {hasRequested ? "Cancel Request" : "Request Job"}
-    </button>
+    <>
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          if (hasRequested) {
+            setShowCancelModal(true);
+          } else {
+            onOpenModal(job);
+          }
+        }}
+        style={{
+          opacity: 1,
+          backgroundColor: hasRequested ? "#f44336" : "#4CAF50",
+          color: "white",
+          padding: "8px 12px",
+          border: "none",
+          borderRadius: "4px",
+          cursor: "pointer"
+        }}
+      >
+        {hasRequested ? "Cancel Request" : "Request Job"}
+      </button>
+
+      {showCancelModal && (
+        <CancelJobModal
+          job={job}
+          onClose={() => setShowCancelModal(false)}
+          setHasRequested={setHasRequested}
+        />
+      )}
+    </>
   );
 }
