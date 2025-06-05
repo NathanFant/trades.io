@@ -61,6 +61,7 @@ header {
   justify-content: space-between;
   width: 100%;
   position: fixed;
+  top: 0;
 }
 
 .homepage-link {
@@ -328,6 +329,7 @@ button:hover {
 }
 
 .four-o-four {
+  margin-top: 5.4rem;
   text-align: center;
   color: white;
 
