@@ -7,8 +7,10 @@ export default function RequestJobModal({ job, onClose, setHasRequested }) {
   const [message, setMessage] = useState("Hello, is this still available?");
   const [status, setStatus] = useState("");
   const [isSent, setIsSent] = useState(false);
+  const [sendClicked, setSendClicked] = useState(false);
 
   const sendEmail = async () => {
+    setSendClicked(true);
     try {
       // Fetch poster email
       const res = await fetch(`http://localhost:8000/users/${job.poster_id}`);
@@ -64,7 +66,9 @@ export default function RequestJobModal({ job, onClose, setHasRequested }) {
           onChange={(e) => setMessage(e.target.value)}
         />
         <button onClick={sendEmail} disabled={isSent} style={{marginRight: "1rem"}} >Send</button>
-        <button onClick={onClose}>Cancel</button>
+        <button onClick={onClose} disabled={sendClicked} style={{
+          cursor: sendClicked ? "not-allowed" : "pointer"
+        }}>Cancel</button>
         <p>{status}</p>
       </div>
     </div>
