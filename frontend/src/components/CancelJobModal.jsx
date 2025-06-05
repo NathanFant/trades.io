@@ -8,6 +8,7 @@ export default function CancelJobModal({ job, onClose, setHasRequested }) {
   const [isSent, setIsSent] = useState(false);
 
   const handleCancel = async () => {
+    setIsSent(true);
     try {
 
       const res = await fetch(`http://localhost:8000/requests/${user.user_id}/${job.listing_id}`, {
@@ -56,7 +57,8 @@ export default function CancelJobModal({ job, onClose, setHasRequested }) {
         <button onClick={handleCancel} disabled={isSent} style={{ marginRight: "1rem" }}>
           Yes, Cancel
         </button>
-        <button onClick={onClose}>Go Back</button>
+        <button onClick={onClose} disabled={isSent} style={{
+          cursor: isSent ? "not-allowed" : "pointer" }}>Go Back</button>
         <p>{status}</p>
       </div>
     </div>
