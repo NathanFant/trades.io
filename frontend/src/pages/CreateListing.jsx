@@ -29,7 +29,12 @@ export default function CreateListing() {
 
             return roundedCoords;
         } else {
-            throw new Error("No coordinates found for Zipcode");
+            const defaultCoordinates = {
+                lat: 34.7465,
+                lng: -92.2896
+            }
+            console.warn("Api Fetch Limit Met, AKA WE BROKE. Defaulting to Little Rock, AR coordinates.");
+            return defaultCoordinates;
         }
     };
 
