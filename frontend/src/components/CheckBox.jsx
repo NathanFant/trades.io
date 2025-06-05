@@ -76,8 +76,7 @@ export default function CheckBox({ skill, user_id=9999999 }) {
             <>
                 {(hasSkillByName || user?.user_id === parseInt(user_id)) && (
                     <div
-                    className="skillPill"
-                    style={user?.user_id === parseInt(user_id)  && isChecked ? {cursor: "pointer", backgroundColor: "lightBlue"} : {cursor: "default", backgroundColor: "gray"}}
+                    className={"skillPill" + (isChecked ? " skillPill-checked" : "")}
                     onClick={user?.user_id === parseInt(user_id) ? () => handleSkillAssign() : undefined}
                     >
                         <label style={user?.user_id === parseInt(user_id) ? {cursor: "pointer"} : {cursor: "default"}} >

@@ -64,7 +64,9 @@ export default function ListingCard({ job, expandedId, setExpandedId, handleDele
           </button>
         )}
 
-        <p>{job.description}</p>
+        <p>
+          {expandedId === job.listing_id ?  "" : job.description.length > 200 ? `${job.description.slice(0, 85)}...` : job.description}
+        </p>
 
         {expandedId === job.listing_id && (
           <div className="job-details">

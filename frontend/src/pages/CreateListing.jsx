@@ -97,7 +97,7 @@ export default function CreateListing() {
 
     return (
         <>
-            <div className="listing container">
+            <div className="listing listing-container">
                 <h2>Create a job posting</h2>
                 <form className="listing-form" onSubmit={(e) => handleSubmit(e)} >
                     Job Title<input
@@ -107,7 +107,7 @@ export default function CreateListing() {
                         onChange={(e) => {
                             setListingTitle(e.target.value)
                         }}
-                        required/>
+                        required />
                     Job Description<textarea
                         className="textarea-box input-box"
                         placeholder="Description"
@@ -116,7 +116,7 @@ export default function CreateListing() {
                             setListingDesc(e.target.value)
                         }}
                         rows={6}
-                        required/>
+                        required />
                     Required Skill <select
                         className="input-box"
                         value={selectedSkillId}
@@ -150,7 +150,7 @@ export default function CreateListing() {
                             setListingPay(sanitized)
                         }}
                         required />
-                    <button type="submit" className="create-button">Post job</button>
+                    <button type="submit" className="create-button" style={{ width: "125px", margin: "0 auto" }}>Post job</button>
                 </form>
             </div>
         </>
