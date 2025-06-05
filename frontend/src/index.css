@@ -13,13 +13,16 @@ body {
   color: #111;
   overflow-x: hidden;
 }
+
 @keyframes waves {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -61,6 +64,7 @@ header {
   justify-content: space-between;
   width: 100%;
   position: fixed;
+  top: 0;
 }
 
 .homepage-link {
@@ -79,6 +83,7 @@ header {
 }
 
 .login-box {
+  margin-top: 5rem;
   color: white;
   display: flex;
   justify-content: center;
@@ -220,6 +225,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 3.5rem;
 }
 
 .ads-left,
@@ -317,11 +323,17 @@ button:hover {
 }
 
 .skillPill:hover {
-  background-color: #2e2b2b;
-  color: white
+  background-color: #003366;
+  color: white;
+}
+
+.skillPill-checked {
+  background-color: #004a99;
+  color: white;
 }
 
 .four-o-four {
+  margin-top: 5.4rem;
   text-align: center;
   color: white;
 
@@ -339,7 +351,7 @@ button:hover {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  margin-top: 5.4rem;
+  margin-top: 1rem;
   margin-bottom: 0.7rem;
 }
 
@@ -362,4 +374,9 @@ button:hover {
   padding-left: 1rem;
   cursor: pointer;
   padding-right: 0.5rem;
+}
+
+
+.listing-container {
+  margin-top: 5rem;
 }

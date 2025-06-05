@@ -53,9 +53,9 @@ const HomePage = () => {
             setFilterTerm={setFilterTerm}
           />
           {loading ? (
-            <p>Loading jobs...</p>
+            <p style={{color: 'white'}}>Loading jobs...</p>
           ) : filteredListings.length === 0 ? (
-            <p>No jobs found.</p>
+            <p style={{color: 'white'}}>No jobs found.</p>
           ) : (
             filteredListingsBySkill.map((job, index) => (
               <ListingCard
