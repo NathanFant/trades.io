@@ -1,23 +1,15 @@
 <pre>
 
-  <p style="text-align: center; font-weight: bold;" >Trades.io "Real Work. Real Workers. Right Now."</p>
+  <div style="text-align: center">
+    <p style="font-size: 20px" >Trades.io "Real Work. Real Workers. Right Now.</p>
+  </div>
 
   Contributors:
-      Dan Jump:
-        <a href="https://www.linkedin.com/in/daniel-jump/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://github.com/DanJump2" target="_blank" rel="noreferrer">GitHub</a>
-      Nathan Fant:
-        <a href="https://www.linkedin.com/in/nathan-fant-a28405250/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://github.com/NathanFant" target="_blank" rel="noreferrer">GitHub</a>
-      Ryan Brown:
-        <a href="https://www.linkedin.com/in/ryanbrowndev/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://github.com/purpocto" target="_blank" rel="noreferrer">GitHub</a>
-      Trent Wilkins:
-        <a href="https://www.linkedin.com/in/trent-wilkins/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://github.com/TrentTWilkins" target="_blank" rel="noreferrer">GitHub</a>
-      Vincent Gallo:
-        <a href="https://www.linkedin.com/in/vincent-gallo-51a3b3152/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://github.com/vpgallo" target="_blank" rel="noreferrer">GitHub</a>
+      Dan Jump: <a href="https://www.linkedin.com/in/daniel-jump/" target="_blank" rel="noreferrer">LinkedIn</a> <a href="https://github.com/DanJump2" target="_blank" rel="noreferrer">GitHub</a>
+      Nathan Fant: <a href="https://www.linkedin.com/in/nathan-fant-a28405250/" target="_blank" rel="noreferrer">LinkedIn</a> <a href="https://github.com/NathanFant" target="_blank" rel="noreferrer">GitHub</a>
+      Ryan Brown: <a href="https://www.linkedin.com/in/ryanbrowndev/" target="_blank" rel="noreferrer">LinkedIn</a> <a href="https://github.com/purpocto" target="_blank" rel="noreferrer">GitHub</a>
+      Trent Wilkins: <a href="https://www.linkedin.com/in/trent-wilkins/" target="_blank" rel="noreferrer">LinkedIn</a> <a href="https://github.com/TrentTWilkins" target="_blank" rel="noreferrer">GitHub</a>
+      Vincent Gallo: <a href="https://www.linkedin.com/in/vincent-gallo-51a3b3152/" target="_blank" rel="noreferrer">LinkedIn</a> <a href="https://github.com/vpgallo" target="_blank" rel="noreferrer">GitHub</a>
 
   Trades.io is a simple and intuitive blue collar job website that anyone can understand. It is an
   online marketplace where those who are looking for jobs to be completed can post ads where
@@ -65,9 +57,11 @@
        email to the poster that they have canceled their request.
 
  Screenshots/GIFS:
-  <img width="600px" height="400px" src="/frontend/src/assets/readme/1.png" alt="Screenshot of project"/>
-  <img width="600px" height="400px" src="/frontend/src/assets/readme/2.png" alt="Screenshot of project"/>
-  <img width="600px" height="400px" src="/frontend/src/assets/readme/3.png" alt="Screenshot of project"/>
+  <div style="display: flex; align-items: center">
+    <img width="600px" height="400px" src="/frontend/src/assets/readme/1.png" alt="Screenshot of project"/>
+    <img width="600px" height="400px" src="/frontend/src/assets/readme/2.png" alt="Screenshot of project"/>
+    <img width="600px" height="400px" src="/frontend/src/assets/readme/3.png" alt="Screenshot of project"/>
+  </div>
 
   Tech Stack
     -Frontend
@@ -140,6 +134,5 @@
       -Worker accreditation by Admins
       -Add picture of completed jobs
 
-  Trello Board link:
-    <a href="https://trello.com/b/fT9jyrAz/blue-collar-fiverr" target="_blank" rel="noreferrer">LinkedIn</a>
+    <a href="https://trello.com/b/fT9jyrAz/blue-collar-fiverr" target="_blank" rel="noreferrer">Trello Board link</a>
 </pre>
