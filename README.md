@@ -1,8 +1,6 @@
-<div style="text-align: center">
-  <p style="font-size: 20px" >Trades.io "Real Work. Real Workers. Right Now.</p>
-</div>
-
 <pre>
+  Trades.io "Real Work. Real Workers. Right Now.
+
   Contributors:
       Dan Jump: <a href="https://www.linkedin.com/in/daniel-jump/" target="_blank" rel="noreferrer">LinkedIn</a>, <a href="https://github.com/DanJump2" target="_blank" rel="noreferrer">GitHub</a>
       Nathan Fant: <a href="https://www.linkedin.com/in/nathan-fant-a28405250/" target="_blank" rel="noreferrer">LinkedIn</a>, <a href="https://github.com/NathanFant" target="_blank" rel="noreferrer">GitHub</a>
@@ -56,14 +54,12 @@
        send an email to the job poster showing interest in the job.
       -When a user wants to cancel a job, they can click the button again and send a confirmation
        email to the poster that they have canceled their request.
-</pre>
 
-Screenshots/GIFS:
-<img width="600px" height="400px" src="/frontend/src/assets/readme/1.png" alt="Screenshot of project"/>
-<img width="600px" height="400px" src="/frontend/src/assets/readme/2.png" alt="Screenshot of project"/>
-<img width="600px" height="400px" src="/frontend/src/assets/readme/3.png" alt="Screenshot of project"/>
+  Screenshots/GIFS:
+    <img width="600px" height="400px" style="margin-left: 1rem;" src="/frontend/src/assets/readme/1.png" alt="Screenshot of project"/>
+    <img width="600px" height="400px" style="margin-left: 1rem;" src="/frontend/src/assets/readme/2.png" alt="Screenshot of project"/>
+    <img width="600px" height="400px" style="margin-left: 1rem;" src="/frontend/src/assets/readme/3.png" alt="Screenshot of project"/>
 
-<pre>
   Tech Stack
     -Frontend
       -JavaScript with React and Vite
