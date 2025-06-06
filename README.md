@@ -1,3 +1,5 @@
+<pre>
+
 Trades.io "Real Work. Real Workers. Right Now."
 
 Contributors:
@@ -62,17 +64,21 @@ Filters and search functions
 
  Tech Stack
   -Frontend
-    -Java Script with React and Vite
+    -JavaScript with React and Vite
   -Backend
-    -SQLAlchemy
-    -FastAPI
+    -Python
+      -SQLAlchemy
+      -FastAPI
+      -Pydantic
   - Database
-    -PostgresSQL, Docker
-
-  -Email Integration
+    -PostgresSQL
+  -External APIs
     -EmailJS
+    -OpenCageData
   -Version Control
     -Git, Gitlab
+  -Containerization
+    -Docker
 
  Setup Instructions:
     In Terminal:
@@ -124,3 +130,4 @@ Filters and search functions
 
 Trello Board link:
     https://trello.com/b/fT9jyrAz/blue-collar-fiverr
+</pre>
