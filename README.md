@@ -1,12 +1,21 @@
+Trades.io "Real Work. Real Workers. Right Now."
 
-Trades.io "Real Work. Real Workers. Right Now"
-
-Contributors, NEED TO ADD LINKS TO GIT PROFILES
+Contributors:
     Nathan Fant
+      LinkedIn : https://www.linkedin.com/in/nathan-fant-a28405250/
+      GIT : https://github.com/NathanFant
     Trent Wilkins
+      LinkedIn : https://www.linkedin.com/in/trent-wilkins/
+      GIT : https://github.com/TrentTWilkins
     Ryan Brown
+      LinkedIn : https://www.linkedin.com/in/ryanbrowndev/
+      GIT : https://github.com/purpocto
     Dan Jump
+      LinkedIn : https://www.linkedin.com/in/daniel-jump/
+      GIT : https://github.com/DanJump2
     Vincent Gallo
+      LinkedIn : https://www.linkedin.com/in/vincent-gallo-51a3b3152/
+      GIT : https://github.com/vpgallo
 
 Trades.io is a simple and intuitive blue collar job website that anyone can understand. It is an online marketplace where those who are looking for jobs to be completed can post ads where tradesman and job seekers can request them. The purpose is to make quick and efficient connections between those who need a job completed and those who want to work. No middleman, just work.
 
@@ -21,14 +30,13 @@ User features
   -As a user I want to be able to list tasks
   -As a user I want to be able to advertise my services
   -As a job lister, I want to be able to review job takers
-  -As a user, be able to search
+  -As a user I want to be able to search available jobs
   -Login: I'm a worker
   -Login: I'm looking for a worker
 Admin Features
   -As an Admin I want to be able to delete accounts/posts
 
-
-User Stories
+User Stories:
 
 Screenshots/GIFS:
 
@@ -54,12 +62,13 @@ Filters and search functions
 
  Tech Stack
   -Frontend
-    -React
-    -Vite
+    -Java Script with React and Vite
   -Backend
+    -SQLAlchemy
     -FastAPI
   - Database
-    -Postgres, Docker
+    -PostgresSQL, Docker
+
   -Email Integration
     -EmailJS
   -Version Control
