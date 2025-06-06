@@ -3,18 +3,18 @@
   Trades.io "Real Work. Real Workers. Right Now."
 
   Contributors:
-      Nathan Fant:
-        <a href="https://www.linkedin.com/in/nathan-fant-a28405250/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://github.com/NathanFant" target="_blank" rel="noreferrer">GitHub</a>
-      Trent Wilkins:
-        <a href="https://www.linkedin.com/in/trent-wilkins/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://github.com/TrentTWilkins" target="_blank" rel="noreferrer">GitHub</a>
-      Ryan Brown:
-        <a href="https://www.linkedin.com/in/ryanbrowndev/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://github.com/purpocto" target="_blank" rel="noreferrer">GitHub</a>
       Dan Jump:
         <a href="https://www.linkedin.com/in/daniel-jump/" target="_blank" rel="noreferrer">LinkedIn</a>
         <a href="https://github.com/DanJump2" target="_blank" rel="noreferrer">GitHub</a>
+      Nathan Fant:
+        <a href="https://www.linkedin.com/in/nathan-fant-a28405250/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://github.com/NathanFant" target="_blank" rel="noreferrer">GitHub</a>
+      Ryan Brown:
+        <a href="https://www.linkedin.com/in/ryanbrowndev/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://github.com/purpocto" target="_blank" rel="noreferrer">GitHub</a>
+      Trent Wilkins:
+        <a href="https://www.linkedin.com/in/trent-wilkins/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://github.com/TrentTWilkins" target="_blank" rel="noreferrer">GitHub</a>
       Vincent Gallo:
         <a href="https://www.linkedin.com/in/vincent-gallo-51a3b3152/" target="_blank" rel="noreferrer">LinkedIn</a>
         <a href="https://github.com/vpgallo" target="_blank" rel="noreferrer">GitHub</a>
@@ -65,9 +65,9 @@
        email to the poster that they have canceled their request.
 
  Screenshots/GIFS:
-  <img width="400px" height="600px" src="/frontend/src/assets/readme/1.png" alt="Screenshot of project"/>
-  <img width="600px" height="600px" src="/frontend/src/assets/readme/2.png" alt="Screenshot of project"/>
-  <img width="600px" height="600px" src="/frontend/src/assets/readme/3.png" alt="Screenshot of project"/>
+  <img width="600px" height="400px" src="/frontend/src/assets/readme/1.png" alt="Screenshot of project"/>
+  <img width="600px" height="400px" src="/frontend/src/assets/readme/2.png" alt="Screenshot of project"/>
+  <img width="600px" height="400px" src="/frontend/src/assets/readme/3.png" alt="Screenshot of project"/>
 
   Tech Stack
     -Frontend
@@ -86,23 +86,24 @@
       -Git, Gitlab
     -Containerization
       -Docker
+  <strong>
+    Setup Instructions:
+        In Terminal:
 
-  Setup Instructions:
-      In Terminal:
+        1. Clone the repo [git@ssh.gitlab.galvanize.com:trenttwilkins02/capstone-group-2.git]
 
-      1. Clone the repo [git@ssh.gitlab.galvanize.com:trenttwilkins02/capstone-group-2.git]
+        2. FOR WINDOWS USERS
+            -docker-compose up --build (in root dir)
 
-      2. FOR WINDOWS USERS
-          -docker-compose up --build (in root dir)
-
-      3. FOR MAC USERS
-          -docker-compose up --build (in root dir)
-          -In a new console tab
-          -cd capstone-group-2/frontend
-          -npm install
-          -npm install react-router
-          -npm install @emailjs/browser
-          -npm run dev
+        3. FOR MAC USERS
+            -docker-compose up --build (in root dir)
+            -In a new console tab
+            -cd capstone-group-2/frontend
+            -npm install
+            -npm install react-router
+            -npm install @emailjs/browser
+            -npm run dev
+    </strong>
 
 
   Challenges Faced and solutions
