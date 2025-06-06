@@ -6,6 +6,7 @@ import CreateListing from "./pages/CreateListing";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
+
 export default function App() {
   return (
     <>
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/profile/:user_id" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+
     </>
   );
 }

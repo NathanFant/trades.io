@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ListingCard from "../components/ListingCard";
 import { AdLeft, AdRight } from "../components/AdBanner";
 import SearchFilterBar from "../components/SearchFilterBar";
-
+import Footer from "../components/Footer";
 
 
 const HomePage = () => {
@@ -43,34 +43,37 @@ const HomePage = () => {
 
 
   return (
-    <div className="homepage-container-with-ads">
-      <AdLeft />
-      <div className="homepage-main-content">
-        <div className="listings">
-          <SearchFilterBar
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            setFilterTerm={setFilterTerm}
-          />
-          {loading ? (
-            <p style={{color: 'white'}}>Loading jobs...</p>
-          ) : filteredListings.length === 0 ? (
-            <p style={{color: 'white'}}>No jobs found.</p>
-          ) : (
-            filteredListingsBySkill.map((job, index) => (
-              <ListingCard
-                key={index}
-                job={job}
-                expandedId={expandedId}
-                setExpandedId={setExpandedId}
-                handleDeleteFromParent={handleDeleteFromParent}
-              />
-            ))
-          )}
+    <>
+      <div className="homepage-container-with-ads">
+        <AdLeft />
+        <div className="homepage-main-content">
+          <div className="listings">
+            <SearchFilterBar
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              setFilterTerm={setFilterTerm}
+            />
+            {loading ? (
+              <p style={{color: 'white'}}>Loading jobs...</p>
+            ) : filteredListings.length === 0 ? (
+              <p style={{color: 'white'}}>No jobs found.</p>
+            ) : (
+              filteredListingsBySkill.map((job, index) => (
+                <ListingCard
+                  key={index}
+                  job={job}
+                  expandedId={expandedId}
+                  setExpandedId={setExpandedId}
+                  handleDeleteFromParent={handleDeleteFromParent}
+                />
+              ))
+            )}
+          </div>
         </div>
+        <AdRight />
       </div>
-      <AdRight />
-    </div>
+      <Footer/>
+    </>
   );
 
 };
