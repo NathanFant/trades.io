@@ -109,9 +109,10 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: top;
   width: 100%;
   max-width: 600px;
+  min-height: 78.5vh;
   margin: 0.5rem auto;
 }
 
@@ -355,7 +356,7 @@ button:hover {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  margin-top: 1rem;
+  margin-top: 1.9rem;
   margin-bottom: 0.7rem;
 }
 
@@ -391,8 +392,5 @@ footer {
   animation: waves 30s ease-in-out infinite;
   color: white;
   text-align: center;
-  bottom: 0;
   width: 100%;
-  ;
-
 }

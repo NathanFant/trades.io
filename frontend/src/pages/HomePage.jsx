@@ -55,7 +55,7 @@ const HomePage = () => {
             />
             {loading ? (
               <p style={{color: 'white'}}>Loading jobs...</p>
-            ) : filteredListings.length === 0 ? (
+            ) : filteredListingsBySkill.length === 0 ? (
               <p style={{color: 'white'}}>No jobs found.</p>
             ) : (
               filteredListingsBySkill.map((job, index) => (
