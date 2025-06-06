@@ -1,6 +1,6 @@
 <pre>
 
-  Trades.io "Real Work. Real Workers. Right Now."
+  <p style="text-align: center; font-weight: bold;" >Trades.io "Real Work. Real Workers. Right Now."</p>
 
   Contributors:
       Dan Jump:
@@ -86,7 +86,8 @@
       -Git, Gitlab
     -Containerization
       -Docker
-  <strong>
+
+
     Setup Instructions:
         In Terminal:
 
@@ -103,7 +104,6 @@
             -npm install react-router
             -npm install @emailjs/browser
             -npm run dev
-    </strong>
 
 
   Challenges Faced and solutions
