@@ -5,7 +5,9 @@ VALUES
 ('Ryan', 'ryan@gmail.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', TRUE, '2025-05-17'),
 ('Dan', 'dan@gmail.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', TRUE, '2025-05-18'),
 ('Vince', 'vince@gmail.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', TRUE, '2025-05-19'),
-('Johnny', 'Johnny@example.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', FALSE, '2025-05-20');
+('Johnny', 'Johnny@example.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', FALSE, '2025-05-20'),
+('Trades', 'tradesdotio@gmail.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', FALSE, '2025-05-16'),
+('Cancel', 'cancel.tradesdotio@gmail.com', '$2b$12$op09fnhVvcYFPGTsEKsgvu9LNuMhPNjI24NBfzP0RK0XGP9IvIU96', FALSE, '2025-05-16');
 
 INSERT INTO listings (title, description, latitude, longitude, price, required_skill, poster_id, created_at)
 VALUES
@@ -38,7 +40,8 @@ VALUES
 ('Plumber – “Shrek”-Themed Airbnb', 'Everything is swamp green. Don’t ask.', 39.1031, -84.5120, 29.0, 'plumbing', 3, '2025-06-04'),
 ('HVAC – Penguin Exhibit', 'Penguins not employees. Don’t give them snacks.', 40.4406, -79.9959, 32.0, 'hvac', 2, '2025-06-04'),
 ('Electrician – Laser Tag Arena', 'Must dodge lasers while fixing things.', 38.8339, -104.8214, 30.0, 'electrician', 3, '2025-06-04'),
-('Cleaning Crew – Abandoned Mall', 'Includes hazard pay and possible ghost bonuses.', 41.5934, -87.3464, 27.0, 'cleaning', 5, '2025-06-04');
+('Cleaning Crew – Abandoned Mall', 'Includes hazard pay and possible ghost bonuses.', 41.5934, -87.3464, 27.0, 'cleaning', 5, '2025-06-04'),
+('Request and cancel this job', 'Showing off email feature', 41.5934, -87.3464, 27.0, 'other', 8 , '2025-06-04');
 
 
 INSERT INTO requests (listing_id, worker_id, created_at)
