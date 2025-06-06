@@ -56,9 +56,9 @@
        email to the poster that they have canceled their request.
 
   Screenshots/GIFS:
-    <img width="600px" height="400px" style="margin-left: 1rem;" src="/frontend/src/assets/readme/1.png" alt="Screenshot of project"/>
-    <img width="600px" height="400px" style="margin-left: 1rem;" src="/frontend/src/assets/readme/2.png" alt="Screenshot of project"/>
-    <img width="600px" height="400px" style="margin-left: 1rem;" src="/frontend/src/assets/readme/3.png" alt="Screenshot of project"/>
+    <img width="600px" height="400px" style="margin-left: 5rem; border-radius: 5px;" src="/frontend/src/assets/readme/1.png" alt="Screenshot of project"/>
+    <img width="600px" height="400px" style="margin-left: 5rem;" src="/frontend/src/assets/readme/2.png" alt="Screenshot of project"/>
+    <img width="600px" height="400px" style="margin-left: 5rem;" src="/frontend/src/assets/readme/3.png" alt="Screenshot of project"/>
 
   Tech Stack
     -Frontend
@@ -109,13 +109,13 @@
 
 
   Lessons Learned and Team Workflow Notes
-      -Branches smoothed out our production, allowing us to work on multiple tasks. There was a learning curve but
-        our organization and flow improved as we progressed
+      -Branches smoothed out our production, allowing us to work on multiple tasks.
+        There was a learning curve but our organization and flow improved as we progressed
       -Everyone has their own working style, and we learned to meld them together.
-      -Importance of sticking to a structure that we make before coding begins. Staying in line with our plans and not
-        getting sidetracked with new ideas before our current tasks are completed.
-      -Communication between team members working on different branches. Making sure that we know what files
-        are being touched, to minimize the chance of overlap.
+      -Importance of sticking to a structure that we make before coding begins. Staying in line with
+        our plans and not getting sidetracked with new ideas before our current tasks are completed.
+      -Communication between team members working on different branches. Making sure that we know
+        what files are being touched, to minimize the chance of overlap.
       -Building a full stack application is difficult and everyone has something different to bring
         to the table. We all have our specialties.
       -Simple can be better, there is no need to reinvent the wheel.
