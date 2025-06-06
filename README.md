@@ -4,7 +4,7 @@ Trades.io "Real Work. Real Workers. Right Now."
 
 Contributors:
     Nathan Fant
-      LinkedIn : https://www.linkedin.com/in/nathan-fant-a28405250/
+      LinkedIn : <a href="https://www.linkedin.com/in/nathan-fant-a28405250/" target="_blank"></a>
       GIT : https://github.com/NathanFant
     Trent Wilkins
       LinkedIn : https://www.linkedin.com/in/trent-wilkins/
