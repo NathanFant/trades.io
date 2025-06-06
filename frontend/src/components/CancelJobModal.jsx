@@ -25,7 +25,7 @@ export default function CancelJobModal({ job, onClose, setHasRequested }) {
       const templateParams = {
         from_name: user.username,
         from_email: user.email,
-        to_name: poster.username,
+        user_name: poster.username,
         to_email: poster.email,
         job_title: job.title,
         message: `${user.username} has canceled their request for your job listing: "${job.title}".`,
