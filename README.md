@@ -2,11 +2,12 @@
   Trades.io "Real Work. Real Workers. Right Now.
 
   Contributors:
-      Dan Jump: <a href="https://www.linkedin.com/in/daniel-jump/" target="_blank" rel="noreferrer">LinkedIn</a>, <a href="https://github.com/DanJump2" target="_blank" rel="noreferrer">GitHub</a>
+      <!-- Dan Jump: <a href="https://www.linkedin.com/in/daniel-jump/" target="_blank" rel="noreferrer">LinkedIn</a>, <a href="https://github.com/DanJump2" target="_blank" rel="noreferrer">GitHub</a> -->
       Nathan Fant: <a href="https://www.linkedin.com/in/nathan-fant-a28405250/" target="_blank" rel="noreferrer">LinkedIn</a>, <a href="https://github.com/NathanFant" target="_blank" rel="noreferrer">GitHub</a>
-      Ryan Brown: <a href="https://www.linkedin.com/in/ryanbrowndev/" target="_blank" rel="noreferrer">LinkedIn</a>, <a href="https://github.com/purpocto" target="_blank" rel="noreferrer">GitHub</a>
+      <!-- Ryan Brown: <a href="https://www.linkedin.com/in/ryanbrowndev/" target="_blank" rel="noreferrer">LinkedIn</a>, <a href="https://github.com/purpocto" target="_blank" rel="noreferrer">GitHub</a> -->
       Trent Wilkins: <a href="https://www.linkedin.com/in/trent-wilkins/" target="_blank" rel="noreferrer">LinkedIn</a>, <a href="https://github.com/TrentTWilkins" target="_blank" rel="noreferrer">GitHub</a>
-      Vincent Gallo: <a href="https://www.linkedin.com/in/vincent-gallo-51a3b3152/" target="_blank" rel="noreferrer">LinkedIn</a>, <a href="https://github.com/vpgallo" target="_blank" rel="noreferrer">GitHub</a>
+      <!-- Vincent Gallo: <a href="https://www.linkedin.com/in/vincent-gallo-51a3b3152/" target="_blank" rel="noreferrer">LinkedIn</a>, <a href="https://github.com/vpgallo" target="_blank" rel="noreferrer">GitHub</a> -->
+      Plus three vibe coders who contributed technical debt.
 
   Trades.io is a simple and intuitive blue collar job website that anyone can understand. It is an
   online marketplace where those who are looking for jobs to be completed can post ads where
